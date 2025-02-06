@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Alimentación</title>
+    <link rel="stylesheet" href="css1.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <img src="logo.png" alt="Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Tienda</a></li>
+                    <li><a href="#">Novedades</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Cuenta</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="carousel">
+        <div class="carousel-container">
+            <img src="img1.png" class="carousel-img active">
+            <img src="img2.png" class="carousel-img">
+            <img src="img3.png" class="carousel-img">
+        </div>
+    </section>
+    
+    <section class="filtros">
+        <button class="filtro" onclick="filtrar('sin-gluten')">Sin Gluten</button>
+        <button class="filtro" onclick="filtrar('sin-lactosa')">Sin Lactosa</button>
+        <button class="filtro" onclick="filtrar('sin-leche')">Sin Leche</button>
+        <button class="filtro" onclick="filtrar('sin-frutos-secos')">Sin Frutos Secos</button>
+        <button class="ver-todos" onclick="verTodos()">Ver Todos los Productos</button>
+    </section>
+    
+    <section class="galeria-productos">
+        <div class="productos-grid" id="productos-grid">
+            <!-- Se generarán imágenes con JS -->
+        </div>
+        <button id="cargar-mas">Cargar Más</button>
+    </section>
+    
+    <script src="java1.js"></script>
+</body>
+</html>

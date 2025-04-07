@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Alimentación</title>
+    <title>Filtro de Productos</title>
     <link rel="stylesheet" href="css1.css">
 </head>
 <body>
+
     <header>
         <div class="nav-container">
-            <img src="logo.png" alt="Logo" class="logo">
+            <img src="imagenes/Logo.png" alt="Logo" class="logo">
+            <div class="search-wrapper">
+                <button class="search-icon">
+                    <div class="lupa">
+                        <img src="imagenes/lupa.png" alt="Buscar">
+                    </div>
+                </button>
+                <input type="text" class="search-input" placeholder="Buscar">
+            </div>
             <nav>
                 <ul>
                     <li><a href="#">Inicio</a></li>
@@ -23,30 +32,43 @@
             </nav>
         </div>
     </header>
-    
+
     <section class="carousel">
         <div class="carousel-container">
-            <img src="img1.png" class="carousel-img active">
-            <img src="img2.png" class="carousel-img">
-            <img src="img3.png" class="carousel-img">
+            <img src="imagenes/img1.png" class="carousel-img">
+            <img src="imagenes/img2.png" class="carousel-img">
+            <img src="imagenes/img3.jpg" class="carousel-img">
         </div>
     </section>
-    
+
     <section class="filtros">
-        <button class="filtro" onclick="filtrar('sin-gluten')">Sin Gluten</button>
-        <button class="filtro" onclick="filtrar('sin-lactosa')">Sin Lactosa</button>
-        <button class="filtro" onclick="filtrar('sin-leche')">Sin Leche</button>
-        <button class="filtro" onclick="filtrar('sin-frutos-secos')">Sin Frutos Secos</button>
-        <button class="ver-todos" onclick="verTodos()">Ver Todos los Productos</button>
+        <button class="btn-filtros">&#9776; Filtra según tus necesidades</button>
     </section>
-    
-    <section class="galeria-productos">
-        <div class="productos-grid" id="productos-grid">
-            <!-- Se generarán imágenes con JS -->
-        </div>
-        <button id="cargar-mas">Cargar Más</button>
+
+    <section class="categorias-grid">
+        <a href="aperitivos.html" class="categoria">
+            <img src="imagenes/aperitivos.jpg" alt="Aperitivos">
+        </a>
+        <a href="carnes_vegetales.html" class="categoria">
+            <img src="imagenes/Carnes_vegetales.jpeg" alt="Carnes Vegetales">
+        </a>
+        <a href="arroz_legumbres.html" class="categoria">
+            <img src="imagenes/Legumbres.jpg" alt="Arroz, Legumbres y Cereal">
+        </a>
+        <a href="chocolates.html" class="categoria">
+            <img src="imagenes/Chocolates.jpg" alt="Chocolates">
+        </a>
+        <a href="condimentos.html" class="categoria">
+            <img src="imagenes/Condimentos.jpg" alt="Condimentos y Semillas">
+        </a>
+        <a href="galletas.html" class="categoria">
+            <img src="imagenes/Galletas.jpg" alt="Galletas y Bollería">
+        </a>
+        <a href="harinas.html" class="categoria">
+            <img src="imagenes/Harina.jpg" alt="Harinas y Levadura">
+        </a>
     </section>
-    
+
     <script src="java1.js"></script>
 </body>
-</html>
+</html> 

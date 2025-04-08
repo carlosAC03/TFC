@@ -11,6 +11,7 @@
     <header>
         <div class="nav-container">
             <img src="imagenes/Logo.png" alt="Logo" class="logo">
+    
             <div class="search-wrapper">
                 <button class="search-icon">
                     <div class="lupa">
@@ -19,20 +20,35 @@
                 </button>
                 <input type="text" class="search-input" placeholder="Buscar">
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Tienda</a></li>
-                    <li><a href="#">Novedades</a></li>
-                    <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Cuenta</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
+    
+            <div class="iconos-header">
+                <a href="login.html" class="icono-header">
+                    <img src="imagenes/login.png" alt="Usuario">
+                </a>
+                <a href="carrito.html" class="icono-header">
+                    <img src="imagenes/carrito.png" alt="Carrito">
+                </a>
+            </div>
         </div>
+    
+        <!-- ⬇ Menú de navegación debajo de logo + buscador -->
+        <nav class="main-menu">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Tienda</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Cuenta</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    
+        <!-- Categorías debajo del menú -->
+        <section class="categorias-grid">
+            <!-- (contenido igual que antes) -->
+        </section>
     </header>
-
     <section class="carousel">
         <div class="carousel-container">
             <img src="imagenes/img1.png" class="carousel-img active">

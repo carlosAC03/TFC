@@ -12,33 +12,113 @@ header {
     z-index: 1000;
 }
 
+/* Contenedor superior con logo, búsqueda e iconos */
 .nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
+    flex-wrap: wrap;
 }
 
 .logo {
     width: 120px;
 }
 
-nav ul {
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #f1f5f9;
+    border-radius: 9999px;
+    padding: 5px 10px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 20px;
+    flex-grow: 1;
+}
+
+.search-icon {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 9999px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    color: #64748b;
+    flex-grow: 1;
+}
+
+.lupa {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lupa img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Iconos de usuario y carrito */
+.iconos-header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.icono-header img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icono-header img:hover {
+    transform: scale(1.1);
+}
+
+/* Menú principal debajo del nav-container */
+.main-menu {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+}
+
+.main-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 15px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-nav ul li a {
+.main-menu ul li a {
     text-decoration: none;
     color: #333;
-    padding: 5px 10px;
+    font-weight: 500;
+    padding: 8px 12px;
     transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
+.main-menu ul li a:hover {
     color: #800000;
 }
 
@@ -161,54 +241,6 @@ nav ul li a:hover {
     background-color: #228B22;
 }
 
-.search-wrapper {
-    display: flex;
-    align-items: center;
-    background-color: #f1f5f9;
-    border-radius: 9999px;
-    padding: 5px 10px;
-    max-width: 500px;
-    width: 100%;
-    margin: 0 20px;
-    flex-grow: 1;
-}
-
-.search-icon {
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 9999px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
-    cursor: pointer;
-}
-
-.search-input {
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 16px;
-    color: #64748b;
-    flex-grow: 1;
-}
-
-.lupa {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lupa img {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-}
-
 .filtro-menu {
     position: fixed;
     top: 0;
@@ -274,6 +306,7 @@ nav ul li a:hover {
     opacity: 1;
     pointer-events: auto;
 }
+
 .cerrar-menu {
     position: absolute;
     top: 10px;
@@ -300,5 +333,10 @@ nav ul li a:hover {
 
     .filtro-menu {
         width: 200px;
+    }
+
+    .main-menu ul {
+        flex-direction: column;
+        align-items: center;
     }
 }

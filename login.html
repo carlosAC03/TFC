@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Iniciar sesión</h2>
+        <form onsubmit="event.preventDefault(); window.location.href='index.html';">
+         <input type="email" class="input-login" placeholder="Correo electrónico" required 
+            oninvalid="this.setCustomValidity('Por favor, introduce tu correo electrónico')" 
+            oninput="this.setCustomValidity('')">
+         <input type="password" class="input-login" placeholder="Contraseña" required 
+            oninvalid="this.setCustomValidity('Por favor, introduce tu contraseña')" 
+            oninput="this.setCustomValidity('')">
+            <button type="submit" class="login-btn">Crear</button>
+        </form>
+    </div>
+
+</body>
+</html>

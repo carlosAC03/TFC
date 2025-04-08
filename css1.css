@@ -71,7 +71,6 @@ nav ul li a:hover {
     opacity: 1;
 }
 
-/* NUEVO: Estilo actualizado para categorias-grid */
 .categorias-grid {
     display: flex;
     flex-wrap: wrap;
@@ -81,24 +80,74 @@ nav ul li a:hover {
     padding: 0 20px;
 }
 
+.categoria {
+    position: relative;
+    display: inline-block;
+}
+
 .categoria img {
     width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-.categoria img:hover {
+.categoria:hover img {
     transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.7);
+}
+
+/* Tooltip centrado */
+.categoria::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-size: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.categoria::before {
+    content: "";
+    position: absolute;
+    top: calc(50% + 24px);
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    width: 60%;
+    background-color: #00cc00;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.categoria:hover::after {
+    opacity: 1;
+    background-color: #228B22;
+}
+
+.categoria:hover::before {
+    opacity: 1;
 }
 
 .btn-filtros {
     display: block;
     margin: 40px auto;
     padding: 12px 24px;
-    background-color: #006400; /* Verde oscuro */
+    background-color: #006400;
     color: white;
     font-size: 16px;
     border: none;
@@ -109,13 +158,13 @@ nav ul li a:hover {
 
 .btn-filtros:hover {
     transform: scale(1.05);
-    background-color: #228B22; /* Verde un poco más claro */
+    background-color: #228B22;
 }
 
 .search-wrapper {
     display: flex;
     align-items: center;
-    background-color: #f1f5f9; /* fondo tipo 'slate-100' */
+    background-color: #f1f5f9;
     border-radius: 9999px;
     padding: 5px 10px;
     max-width: 500px;
@@ -125,7 +174,7 @@ nav ul li a:hover {
 }
 
 .search-icon {
-    background-color: #4CAF50; /* Verde */
+    background-color: #4CAF50;
     border: none;
     border-radius: 9999px;
     width: 32px;
@@ -142,9 +191,10 @@ nav ul li a:hover {
     outline: none;
     background: transparent;
     font-size: 16px;
-    color: #64748b; /* gris tipo slate */
+    color: #64748b;
     flex-grow: 1;
 }
+
 .lupa {
     width: 20px;
     height: 20px;
@@ -159,11 +209,96 @@ nav ul li a:hover {
     object-fit: contain;
 }
 
+.filtro-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    pointer-events: none;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f8f8;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: left 0.3s ease, opacity 0.3s ease;
+    z-index: 1001;
+}
 
-/* NUEVO: Responsive para pantallas pequeñas */
+.filtro-menu.open {
+    left: 0;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.filtro-menu h3 {
+    margin-top: 0;
+    color: #006400;
+    border-bottom: 2px solid #228B22;
+    padding-bottom: 10px;
+}
+
+.filtro-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.filtro-menu ul li {
+    margin: 15px 0;
+}
+
+.filtro-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.filtro-menu ul li a:hover {
+    color: #228B22;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.cerrar-menu {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1002;
+}
+
+.cerrar-menu:hover {
+    color: #228B22;
+}
+
 @media (max-width: 600px) {
     .categoria img {
         width: 130px;
         height: 130px;
+    }
+
+    .filtro-menu {
+        width: 200px;
     }
 }

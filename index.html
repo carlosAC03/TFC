@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -35,40 +35,57 @@
 
     <section class="carousel">
         <div class="carousel-container">
-            <img src="imagenes/img1.png" class="carousel-img">
+            <img src="imagenes/img1.png" class="carousel-img active">
             <img src="imagenes/img2.png" class="carousel-img">
             <img src="imagenes/img3.jpg" class="carousel-img">
         </div>
     </section>
 
     <section class="filtros">
-        <button class="btn-filtros">&#9776; Filtra según tus necesidades</button>
+        <button class="btn-filtros" id="toggleMenu">&#9776; Filtra según tus necesidades</button>
     </section>
 
+    <div class="filtro-menu">
+        <button class="cerrar-menu">&times;</button>
+        <h3>Filtrar por categoría</h3>
+        <ul>
+            <li><a href="aperitivos.html">Aperitivos</a></li>
+            <li><a href="carnes_vegetales.html">Carnes Vegetales</a></li>
+            <li><a href="arroz_legumbres.html">Arroz, Legumbres y Cereal</a></li>
+            <li><a href="chocolates.html">Chocolates</a></li>
+            <li><a href="condimentos.html">Condimentos y Semillas</a></li>
+            <li><a href="galletas.html">Galletas y Bollería</a></li>
+            <li><a href="harinas.html">Harinas y Levadura</a></li>
+        </ul>
+    </div>
+
+<!-- Overlay -->
+<div class="overlay"></div>
+
     <section class="categorias-grid">
-        <a href="aperitivos.html" class="categoria">
+        <a href="aperitivos.html" class="categoria" data-tooltip="Aperitivos">
             <img src="imagenes/aperitivos.jpg" alt="Aperitivos">
         </a>
-        <a href="carnes_vegetales.html" class="categoria">
+        <a href="carnes_vegetales.html" class="categoria" data-tooltip="Carnes Vegetales">
             <img src="imagenes/Carnes_vegetales.jpeg" alt="Carnes Vegetales">
         </a>
-        <a href="arroz_legumbres.html" class="categoria">
+        <a href="arroz_legumbres.html" class="categoria" data-tooltip="Arroz, Legumbres y Cereal">
             <img src="imagenes/Legumbres.jpg" alt="Arroz, Legumbres y Cereal">
         </a>
-        <a href="chocolates.html" class="categoria">
+        <a href="chocolates.html" class="categoria" data-tooltip="Chocolates">
             <img src="imagenes/Chocolates.jpg" alt="Chocolates">
         </a>
-        <a href="condimentos.html" class="categoria">
+        <a href="condimentos.html" class="categoria" data-tooltip="Condimentos y Semillas">
             <img src="imagenes/Condimentos.jpg" alt="Condimentos y Semillas">
         </a>
-        <a href="galletas.html" class="categoria">
+        <a href="galletas.html" class="categoria" data-tooltip="Galletas y Bollería">
             <img src="imagenes/Galletas.jpg" alt="Galletas y Bollería">
         </a>
-        <a href="harinas.html" class="categoria">
+        <a href="harinas.html" class="categoria" data-tooltip="Harinas y Levadura">
             <img src="imagenes/Harina.jpg" alt="Harinas y Levadura">
         </a>
     </section>
 
     <script src="java1.js"></script>
 </body>
-</html> 
+</html>

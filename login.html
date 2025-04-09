@@ -3,22 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css1.css"> <!-- Header/Footer estilos -->
+    <link rel="stylesheet" href="login.css"> <!-- Estilos del formulario -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Iniciar sesión</h2>
-        <form onsubmit="event.preventDefault(); window.location.href='index.html';">
-         <input type="email" class="input-login" placeholder="Correo electrónico" required 
-            oninvalid="this.setCustomValidity('Por favor, introduce tu correo electrónico')" 
-            oninput="this.setCustomValidity('')">
-         <input type="password" class="input-login" placeholder="Contraseña" required 
-            oninvalid="this.setCustomValidity('Por favor, introduce tu contraseña')" 
-            oninput="this.setCustomValidity('')">
-            <button type="submit" class="login-btn">Crear</button>
-        </form>
+<!-- Header completo -->
+<header>
+    <div class="nav-container">
+        <img src="imagenes/Logo.png" alt="Logo" class="logo">
+
+        <div class="search-wrapper">
+            <button class="search-icon">
+                <div class="lupa">
+                    <img src="imagenes/lupa.png" alt="Buscar">
+                </div>
+            </button>
+            <input type="text" class="search-input" placeholder="Buscar productos ...">
+        </div>
+
+        <div class="iconos-header">
+            <a href="login.html" class="icono-header">
+                <img src="imagenes/login.png" alt="Usuario">
+            </a>
+            <a href="carrito.html" class="icono-header">
+                <img src="imagenes/carrito.png" alt="Carrito">
+            </a>
+        </div>
     </div>
 
+    <nav class="main-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="#">Tienda</a></li>
+            <li><a href="#">Novedades</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Cuenta</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Formulario de login bien estructurado -->
+<main class="login-main">
+    <div class="login-box">
+        <h2>Mi cuenta</h2>
+        <h3>Acceder</h3>
+        <form onsubmit="event.preventDefault(); window.location.href='index.html';">
+            <label for="email">Nombre de usuario o correo electrónico</label>
+            <input id="email" type="email" class="input-login" required
+                   oninvalid="this.setCustomValidity('Introduce tu correo electrónico')"
+                   oninput="this.setCustomValidity('')">
+
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" class="input-login" required
+                   oninvalid="this.setCustomValidity('Introduce tu contraseña')"
+                   oninput="this.setCustomValidity('')">
+
+            <div class="login-options">
+                <label><input type="checkbox"> Recuérdame</label>
+            </div>
+
+            <button type="submit" class="login-btn">Acceder</button>
+            <div class="forgot-password">
+                <a href="#">¿Olvidaste la contraseña?</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- Footer con contacto -->
+<footer class="footer">
+    <h3>Contacta con nosotros</h3>
+    <p><span class="icon">📞</span> 722 10 84 65</p>
+    <p><span class="icon">💬</span> WhatsApp</p>
+    <p><span class="icon">✉️</span> info@supermercadosacosta.es</p>
+    <p><span class="icon">⏰</span> De lunes a sábados de 8 a 2h y de 5 a 9:30h</p>
+
+    <h4>Síguenos:</h4>
+    <div class="social-icons">
+        <a href="#"><span class="circle">📘</span></a>
+        <a href="#"><span class="circle">🐦</span></a>
+        <a href="#"><span class="circle">📸</span></a>
+    </div>
+</footer>
+
+<script src="java1.js"></script>
 </body>
 </html>

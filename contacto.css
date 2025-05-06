@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FAF8F4;
+    color: #333;
+}
+
+.contacto-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.contacto-container h3 {
+    font-size: 28px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.contacto-container p {
+    margin: 10px 0;
+    color: #8BC34A;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.contacto-container h4 {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #000;
+}
+
+.icon {
+    color: #8BC34A;
+    font-size: 22px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.circle {
+    background-color: #8BC34A;
+    color: white;
+    font-size: 22px;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    background-color: #689F38;
+}
+
+.mapa-container {
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}

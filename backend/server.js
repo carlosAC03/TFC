@@ -20,6 +20,6 @@ app.get("/productos", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log("Servidor en http://localhost:4000");
 });

@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+
 function renderProductos() {
     const contenedor = document.getElementById("productos");
     contenedor.innerHTML = "";
     productos.forEach((p, i) => {
         contenedor.innerHTML += `
             <div class="producto">
-                <img src="${p.imagen}" alt="${p.nombre}">
+                <img src="../${p.imagen}" alt="${p.nombre}">
                 <h4>${p.nombre}</h4>
                 <p>${p.descripcion}</p>
                 <span>${p.precio.toFixed(2)} €</span>

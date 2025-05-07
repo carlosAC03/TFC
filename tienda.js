@@ -3,7 +3,7 @@ const carrito = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const res = await fetch("http://localhost:3000/productos");
+        const res = await fetch("http://localhost:4000/productos");
         const data = await res.json();
         productos.push(...data);
         renderProductos();

@@ -5,12 +5,14 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(cors());
 
-const uri = process.env.MONGO_URL || "mongodb://localhost:27018"; // para local o Docker
+// URI para conectar desde otro contenedor (no desde el host)
+const uri = process.env.MONGO_URL || "mongodb://mongodb:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
 app.get("/productos", async (req, res) => {
     try {
+        console.log("Conectando a MongoDB en:", uri); // Log útil para depuración
         await client.connect();
         const db = client.db(dbName);
         const productos = await db.collection("productos").find().toArray();

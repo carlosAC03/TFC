@@ -9,5 +9,5 @@ COPY backend/ ./
 
 EXPOSE 4000
 
-CMD ["node", "backend/server.js"]
+CMD ["node", "server.js"]
 

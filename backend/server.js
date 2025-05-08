@@ -5,11 +5,10 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(cors());
 
-const uri = process.env.MONGO_URL || "mongodb://localhost:27017"; // URI dinámica para Docker/local
+const uri = process.env.MONGO_URL || "mongodb://localhost:27018"; // para local o Docker
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta de prueba para obtener productos
 app.get("/productos", async (req, res) => {
     try {
         await client.connect();
@@ -22,7 +21,6 @@ app.get("/productos", async (req, res) => {
     }
 });
 
-// Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Servidor en http://localhost:${PORT}`);

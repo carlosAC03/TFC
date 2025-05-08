@@ -4,28 +4,28 @@ const { MongoClient } = require("mongodb");
 
 const app = express();
 
-// Permitir solo peticiones desde tu frontend desplegado en Render
+// Configurar CORS para aceptar peticiones desde tu frontend
 app.use(cors({
-  origin: "https://tfc-1.onrender.com"
+  origin: "https://tfc-1.onrender.com" // Cambia si tu frontend tiene otra URL
 }));
 
-// URI para producción o local
+// Conexión a MongoDB Atlas o local
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta raíz
+// Ruta de prueba
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// Ruta de productos
+// Ruta para obtener productos
 app.get("/productos", async (req, res) => {
   try {
     console.log("Conectando a MongoDB en:", uri);
     await client.connect();
     const db = client.db(dbName);
-    const productos = await db.collection("productos").find().toArray();
+    const productos = await db.collection("producto").find().toArray();
     res.json(productos);
   } catch (err) {
     console.error("Error al conectar con MongoDB:", err);
@@ -33,7 +33,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// Iniciar servidor
+// ✅ Usar el puerto que Render asigna automáticamente
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);

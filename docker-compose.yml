@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:6.0
-    container_name: supermercado_mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+  image: mongo:6.0
+  container_name: supermercado_mongo
+  ports:
+    - "27018:27017"  # puerto externo 27018 para evitar conflicto
+  command: ["--noauth"]
+
 
   backend:
     build: .

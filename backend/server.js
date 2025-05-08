@@ -5,14 +5,20 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(cors());
 
-// URI para conectar desde otro contenedor (no desde el host)
-const uri = process.env.MONGO_URL || "mongodb://mongodb:27017";
+// URI para producción (Railway) o fallback local (desarrollo)
+const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
+// Ruta para probar que el backend funciona
+app.get("/", (req, res) => {
+    res.send("✅ Backend de Supermercados Acosta está activo.");
+});
+
+// Ruta principal de productos
 app.get("/productos", async (req, res) => {
     try {
-        console.log("Conectando a MongoDB en:", uri); // Log útil para depuración
+        console.log("Conectando a MongoDB en:", uri);
         await client.connect();
         const db = client.db(dbName);
         const productos = await db.collection("productos").find().toArray();
@@ -23,7 +29,8 @@ app.get("/productos", async (req, res) => {
     }
 });
 
+// Puerto del servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Servidor en http://localhost:${PORT}`);
+    console.log(`Servidor levantado en el puerto ${PORT}`);
 });

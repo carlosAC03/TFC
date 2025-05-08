@@ -2,7 +2,7 @@ const productos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const res = await fetch("http://localhost:4000/productos");
+        const res = await fetch("https://tfc-2gv2.onrender.com/productos");
         const data = await res.json();
         productos.push(...data);
         renderProductos();

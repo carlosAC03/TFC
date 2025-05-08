@@ -7,7 +7,6 @@ const API_URL =
 const productos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
-<<<<<<< HEAD
   try {
     const res = await fetch(`${API_URL}/productos`);
     const data = await res.json();
@@ -16,16 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Error al cargar productos:", err);
   }
-=======
-    try {
-        const res = await fetch("https://tfc-2gv2.onrender.com/productos");
-        const data = await res.json();
-        productos.push(...data);
-        renderProductos();
-    } catch (err) {
-        console.error("Error al cargar productos:", err);
-    }
->>>>>>> 8c1cf2a58d8f72180001db75c5a37b170c73cf8b
 });
 
 function renderProductos() {

@@ -8,11 +8,11 @@ WORKDIR /app
 COPY backend/package*.json ./
 RUN npm install
 
-COPY backend/ ./backend
-COPY server.js .
+# Copia el backend completo (incluido server.js correctamente)
+COPY backend/ ./
 
-# Expone el puerto
+# Exponer puerto de servidor
 EXPOSE 4000
 
-# Comando para ejecutar el servidor
+# Ejecutar el servidor
 CMD ["node", "server.js"]

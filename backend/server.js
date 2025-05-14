@@ -4,24 +4,24 @@ const bcrypt = require("bcrypt");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-app.use(express.json()); // <- para leer JSON en peticiones POST
+app.use(express.json()); // necesario para leer JSON en POST
 
-// CORS: permite que el frontend en Render se conecte
+// CORS: permitir peticiones desde el frontend en Render
 app.use(cors({
   origin: "https://tfc-1.onrender.com" // tu frontend
 }));
 
-// MongoDB Atlas o local
+// Conexión a MongoDB Atlas o local
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta raíz de prueba
+// Ruta de prueba
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// Ruta para obtener productos
+// Obtener productos
 app.get("/productos", async (req, res) => {
   try {
     await client.connect();
@@ -34,7 +34,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// ✅ Endpoint de login (nuevo)
+// Login de usuario
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -56,6 +56,29 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.error("Error en login:", err);
     res.status(500).json({ message: "Error al procesar login" });
+  }
+});
+
+// Registro de usuario
+app.post("/register", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const usuarios = db.collection("usuarios");
+
+    const existente = await usuarios.findOne({ email });
+    if (existente) {
+      return res.status(400).json({ message: "Usuario ya registrado" });
+    }
+
+    const hashed = await bcrypt.hash(password, 10);
+    await usuarios.insertOne({ email, password: hashed });
+
+    res.status(201).json({ message: "Usuario registrado correctamente" });
+  } catch (err) {
+    console.error("Error en registro:", err);
+    res.status(500).json({ message: "Error al registrar usuario" });
   }
 });
 

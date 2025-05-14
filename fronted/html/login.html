@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="../css/css1.css"> <!-- Header/Footer estilos -->
-    <link rel="stylesheet" href="../css/login.css"> <!-- Estilos del formulario -->
+    <link rel="stylesheet" href="../css/css1.css">
+    <link rel="stylesheet" href="../css/login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<!-- Header completo -->
 <header>
     <div class="nav-container">
         <img src="../imagenes/Logo.png" alt="Logo" class="logo">
@@ -36,31 +35,26 @@
     <nav class="main-menu">
         <ul>
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="../html/tienda.html">Tienda</a></li>
+            <li><a href="tienda.html">Tienda</a></li>
             <li><a href="#">Novedades</a></li>
             <li><a href="#">Ofertas</a></li>
             <li><a href="#">Cuenta</a></li>
-            <li><a href="../html/blog.html">Blog</a></li>
-            <li><a href="../html/contacto.html">Contacto</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- Formulario de login bien estructurado -->
 <main class="login-main">
-    <div class="login-box">
+    <div class="login-box" id="login-section">
         <h2>Mi cuenta</h2>
         <h3>Acceder</h3>
         <form id="login-form">
-            <label for="email">Nombre de usuario o correo electrónico</label>
-            <input id="email" type="email" class="input-login" required
-                   oninvalid="this.setCustomValidity('Introduce tu correo electrónico')"
-                   oninput="this.setCustomValidity('')">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" class="input-login" required>
 
             <label for="password">Contraseña</label>
-            <input id="password" type="password" class="input-login" required
-                   oninvalid="this.setCustomValidity('Introduce tu contraseña')"
-                   oninput="this.setCustomValidity('')">
+            <input id="password" type="password" class="input-login" required>
 
             <div class="login-options">
                 <label><input type="checkbox"> Recuérdame</label>
@@ -71,15 +65,15 @@
                 <a href="#">¿Olvidaste la contraseña?</a>
             </div>
         </form>
+    </div>
 
-        <!-- Botón de cerrar sesión solo visible si hay sesión -->
-        <button id="logout-btn" onclick="logout()" class="login-btn" style="margin-top: 20px; display: none;">
-            Cerrar sesión
-        </button>
+    <div class="login-box" id="welcome-section" style="display: none;">
+        <h2>Bienvenido</h2>
+        <p id="user-email"></p>
+        <button class="login-btn" onclick="logout()">Cerrar sesión</button>
     </div>
 </main>
 
-<!-- Footer con contacto -->
 <footer class="footer">
     <h3>Contacta con nosotros</h3>
     <p><span class="icon">📞</span> 722 10 84 65</p>
@@ -95,7 +89,6 @@
     </div>
 </footer>
 
-<!-- Scripts -->
 <script src="../js/session.js"></script>
 <script src="../js/login.js"></script>
 </body>

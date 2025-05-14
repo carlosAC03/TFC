@@ -4,11 +4,3 @@ function logout() {
     location.reload();
 }
 
-// Mostrar botón "Cerrar sesión" si hay sesión activa
-document.addEventListener("DOMContentLoaded", () => {
-    const logoutBtn = document.getElementById("logout-btn");
-    if (logoutBtn) {
-        const usuario = localStorage.getItem("usuario");
-        logoutBtn.style.display = usuario ? "block" : "none";
-    }
-});

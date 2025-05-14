@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const API_URL = window.location.hostname.includes("localhost")
+        ? "http://localhost:4000"
+        : "https://tu-api-render.onrender.com"; // <== Sustituye con tu URL real
+
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     const loginSection = document.getElementById("login-section");
     const welcomeSection = document.getElementById("welcome-section");
@@ -20,18 +24,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value;
 
-            const res = await fetch("http://localhost:4000/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            });
+            try {
+                const res = await fetch(`${API_URL}/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
 
-            const data = await res.json();
-            if (res.ok) {
-                localStorage.setItem("usuario", JSON.stringify({ email }));
-                location.reload(); // refrescar para mostrar bienvenida
-            } else {
-                alert(data.message || "Error al iniciar sesión");
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem("usuario", JSON.stringify({ email }));
+                    location.reload();
+                } else {
+                    alert(data.message || "Error al iniciar sesión");
+                }
+            } catch (err) {
+                alert("No se pudo conectar con el servidor");
+                console.error(err);
             }
         });
     }

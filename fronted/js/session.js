@@ -3,4 +3,3 @@ function logout() {
     alert("Sesión cerrada");
     location.reload();
 }
-

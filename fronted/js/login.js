@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const API_URL = window.location.hostname.includes("localhost")
         ? "http://localhost:4000"
-        : "https://tu-api-render.onrender.com"; // <== Sustituye con tu URL real
+        : "https://tfc-2gv2.onrender.com"; // <== Sustituye con tu URL real
 
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     const loginSection = document.getElementById("login-section");

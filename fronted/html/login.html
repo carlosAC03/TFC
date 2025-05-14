@@ -36,22 +36,22 @@
     <nav class="main-menu">
         <ul>
             <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../html/tienda.html">Tienda</a></li>
-                <li><a href="#">Novedades</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Cuenta</a></li>
-                <li><a href="../html/blog.html">Blog</a></li>
-                <li><a href="../html/contacto.html">Contacto</a></li>
+            <li><a href="../html/tienda.html">Tienda</a></li>
+            <li><a href="#">Novedades</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Cuenta</a></li>
+            <li><a href="../html/blog.html">Blog</a></li>
+            <li><a href="../html/contacto.html">Contacto</a></li>
         </ul>
     </nav>
-
+</header>
 
 <!-- Formulario de login bien estructurado -->
 <main class="login-main">
     <div class="login-box">
         <h2>Mi cuenta</h2>
         <h3>Acceder</h3>
-        <form onsubmit="event.preventDefault(); window.location.href='index.html';">
+        <form id="login-form">
             <label for="email">Nombre de usuario o correo electrónico</label>
             <input id="email" type="email" class="input-login" required
                    oninvalid="this.setCustomValidity('Introduce tu correo electrónico')"
@@ -71,6 +71,11 @@
                 <a href="#">¿Olvidaste la contraseña?</a>
             </div>
         </form>
+
+        <!-- Botón de cerrar sesión solo visible si hay sesión -->
+        <button id="logout-btn" onclick="logout()" class="login-btn" style="margin-top: 20px; display: none;">
+            Cerrar sesión
+        </button>
     </div>
 </main>
 
@@ -90,6 +95,8 @@
     </div>
 </footer>
 
-<script src="../js/java1.js"></script>
+<!-- Scripts -->
+<script src="../js/session.js"></script>
+<script src="../js/login.js"></script>
 </body>
 </html>

@@ -205,69 +205,6 @@
     "precio": 4.78,
     "imagen": "imagenes/Carnes_vegetales.jpeg",
     "categoria": "Carnes Vegetales"
-  },
-  {
-    "nombre": "Galletas Integrales 27",
-    "descripcion": "Libre de aditivos artificiales.",
-    "precio": 4.25,
-    "imagen": "imagenes/Galletas.jpg",
-    "categoria": "Galletas y Bollería"
-  },
-  {
-    "nombre": "Harina de Espelta 28",
-    "descripcion": "Ingredientes 100% naturales.",
-    "precio": 3.69,
-    "imagen": "imagenes/Galletas.jpg",
-    "categoria": "Galletas y Bollería"
-  },
-  {
-    "nombre": "Snack Natural 29",
-    "descripcion": "Producto saludable y ecológico.",
-    "precio": 2.46,
-    "imagen": "imagenes/aperitivos.jpg",
-    "categoria": "Aperitivos"
-  },
-  {
-    "nombre": "Hamburguesa Vegana 30",
-    "descripcion": "Apto para dietas veganas.",
-    "precio": 2.69,
-    "imagen": "imagenes/Carnes_vegetales.jpeg",
-    "categoria": "Carnes Vegetales"
-  },
-  {
-    "nombre": "Lentejas Bio 31",
-    "descripcion": "Ideal para cocinar recetas caseras.",
-    "precio": 3.84,
-    "imagen": "imagenes/Chocolates.jpg",
-    "categoria": "Chocolates"
-  },
-  {
-    "nombre": "Chocolate Negro 32",
-    "descripcion": "Sin azúcares añadidos.",
-    "precio": 4.16,
-    "imagen": "imagenes/Legumbres.jpg",
-    "categoria": "Arroz, Legumbres y Cereal"
-  },
-  {
-    "nombre": "Pimienta Ecológica 33",
-    "descripcion": "Alto contenido en fibra y sabor.",
-    "precio": 3.9,
-    "imagen": "imagenes/aperitivos.jpg",
-    "categoria": "Aperitivos"
-  },
-  {
-    "nombre": "Galletas Integrales 34",
-    "descripcion": "Libre de aditivos artificiales.",
-    "precio": 2.79,
-    "imagen": "imagenes/Condimentos.jpg",
-    "categoria": "Condimentos y Semillas"
-  },
-  {
-    "nombre": "Harina de Espelta 35",
-    "descripcion": "Ingredientes 100% naturales.",
-    "precio": 3.92,
-    "imagen": "imagenes/Legumbres.jpg",
-    "categoria": "Arroz, Legumbres y Cereal"
   }
   
 ]

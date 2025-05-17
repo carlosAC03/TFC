@@ -6,12 +6,9 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-const path = require("path");
-app.use('/fronted', express.static(path.join(__dirname, '../fronted')));
-
-// ✅ CORS: permitir peticiones desde el frontend en producción
+// ✅ CORS: permitir peticiones desde el frontend desplegado
 app.use(cors({
-  origin: "https://tfc-1.onrender.com" // Cambia esta URL si tu frontend tiene otro dominio
+  origin: "https://tfc-1.onrender.com" // Reemplázalo si usas otro dominio para el frontend
 }));
 
 // 🔗 Conexión a MongoDB

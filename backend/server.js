@@ -6,9 +6,9 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// ✅ CORS: permitir peticiones desde el frontend desplegado
+// ✅ CORS: permitir peticiones desde el frontend en producción
 app.use(cors({
-  origin: "https://tfc-1.onrender.com" // Reemplázalo si usas otro dominio para el frontend
+  origin: "https://tfc-1.onrender.com" // tu frontend
 }));
 
 // 🔗 Conexión a MongoDB
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// 📦 Obtener productos
+// 📦 Obtener todos los productos
 app.get("/productos", async (req, res) => {
   try {
     await client.connect();
@@ -29,8 +29,34 @@ app.get("/productos", async (req, res) => {
     const productos = await db.collection("producto").find().toArray();
     res.json(productos);
   } catch (err) {
-    console.error("Error al conectar con MongoDB:", err);
-    res.status(500).send("Error al conectar con MongoDB");
+    console.error("Error al obtener productos:", err);
+    res.status(500).send("Error al obtener productos");
+  }
+});
+
+// 🛒 Obtener productos en oferta
+app.get("/productos/ofertas", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const productos = await db.collection("producto").find({ oferta: true }).toArray();
+    res.json(productos);
+  } catch (err) {
+    console.error("Error al obtener productos en oferta:", err);
+    res.status(500).send("Error al obtener productos en oferta");
+  }
+});
+
+// 🆕 Obtener productos nuevos (novedades)
+app.get("/productos/novedades", async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const productos = await db.collection("producto").find({ novedad: true }).toArray();
+    res.json(productos);
+  } catch (err) {
+    console.error("Error al obtener novedades:", err);
+    res.status(500).send("Error al obtener novedades");
   }
 });
 
@@ -82,7 +108,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// 🚀 Puerto dinámico (Render o local)
+// 🚀 Puerto dinámico para Render o local
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);

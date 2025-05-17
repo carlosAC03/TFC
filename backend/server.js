@@ -4,24 +4,27 @@ const bcrypt = require("bcrypt");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-app.use(express.json()); // necesario para leer JSON en POST
+app.use(express.json());
 
-// CORS: permitir peticiones desde el frontend en Render
+// ✅ Servir archivos estáticos del frontend (como imágenes, CSS, JS)
+app.use('/fronted', express.static('fronted'));
+
+// ✅ CORS: permitir peticiones desde el frontend en producción
 app.use(cors({
-  origin: "https://tfc-1.onrender.com" // tu frontend
+  origin: "https://tfc-1.onrender.com" // Cambia esta URL si tu frontend tiene otro dominio
 }));
 
-// Conexión a MongoDB Atlas o local
+// 🔗 Conexión a MongoDB
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta de prueba
+// 🌐 Ruta de prueba
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// Obtener productos
+// 📦 Obtener productos
 app.get("/productos", async (req, res) => {
   try {
     await client.connect();
@@ -34,7 +37,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// Login de usuario
+// 🔐 Login de usuario
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -59,7 +62,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Registro de usuario
+// 📝 Registro de usuario
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -82,7 +85,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Puerto dinámico para Render
+// 🚀 Puerto dinámico (Render o local)
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);

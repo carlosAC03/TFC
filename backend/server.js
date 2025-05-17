@@ -6,8 +6,8 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// ✅ Servir archivos estáticos del frontend (como imágenes, CSS, JS)
-app.use('/fronted', express.static('fronted'));
+const path = require("path");
+app.use('/fronted', express.static(path.join(__dirname, '../fronted')));
 
 // ✅ CORS: permitir peticiones desde el frontend en producción
 app.use(cors({

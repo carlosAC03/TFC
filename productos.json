@@ -3,25 +3,25 @@
     "nombre": "Galletas Digestive",
     "descripcion": "Galletas integrales con alto contenido en fibra.",
     "precio": 2.49,
-    "imagen": "imagenes/aperitivos.jpg"
+    "imagen": "fronted/images/aperitivos"
   },
   {
     "nombre": "Chocolate Negro 85%",
     "descripcion": "Chocolate puro sin azúcar añadido.",
     "precio": 1.99,
-    "imagen": "imagenes/Chocolates.jpg"
+    "imagen": "fronted/imagenes/Chocolates.jpg"
   },
   {
     "nombre": "Harina de Espelta",
     "descripcion": "Harina ecológica ideal para panes y repostería.",
     "precio": 3.2,
-    "imagen": "imagenes/Harina.jpg"
+    "imagen": "fronted/imagenes/Harina.jpg"
   },
   {
     "nombre": "Aperitivos de Maíz",
     "descripcion": "Snacks horneados con sabor a barbacoa.",
     "precio": 1.5,
-    "imagen": "imagenes/aperitivos.jpg"
+    "imagen": "fronted/imagenes/aperitivos.jpg"
   },
 
    {

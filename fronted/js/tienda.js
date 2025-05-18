@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
-            : "https://tfc-2gv2.onrender.com"; // ← REEMPLAZA esto con tu URL real de Render
+            : "https://tfc-1.onrender.com"; // ← Tu backend real en Render
 
         const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
@@ -37,7 +37,7 @@ function renderProductos() {
     productosFiltrados.forEach((p, i) => {
         contenedor.innerHTML += `
             <div class="producto">
-                <img src="../${p.imagen}" alt="${p.nombre}">
+                <img src="${p.imagen}" alt="${p.nombre}">
                 <h4>${p.nombre}</h4>
                 <p>${p.descripcion}</p>
                 <span>${p.precio.toFixed(2)} €</span>
@@ -64,4 +64,3 @@ function añadirCarrito(index) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     alert(`${nombre} añadido al carrito`);
 }
-

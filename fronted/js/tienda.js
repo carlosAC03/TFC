@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
-            : "https://TU_BACKEND_RENDER.onrender.com"; // ← REEMPLAZA esto con tu URL real de Render
+            : "https://tfc-2gv2.onrender.com"; // ← REEMPLAZA esto con tu URL real de Render
 
         const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();

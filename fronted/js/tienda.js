@@ -2,7 +2,11 @@ const productos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const res = await fetch("http://localhost:4000/productos");
+        const API_URL = location.hostname === "localhost"
+            ? "http://localhost:4000"
+            : "https://TU_BACKEND_RENDER.onrender.com"; // ← REEMPLAZA esto con tu URL real de Render
+
+        const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
         productos.push(...data);
         renderProductos();
@@ -60,3 +64,4 @@ function añadirCarrito(index) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     alert(`${nombre} añadido al carrito`);
 }
+

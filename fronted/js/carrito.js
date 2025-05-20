@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || {};
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    if (!usuario?.email) {
+        alert("Debes iniciar sesión para ver tu carrito.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const clave = `carrito_${usuario.email}`;
+    const carrito = JSON.parse(localStorage.getItem(clave)) || {};
     renderCarrito(carrito);
 });
 
@@ -9,7 +17,6 @@ function renderCarrito(carrito) {
 
     for (const nombre in carrito) {
         const producto = carrito[nombre];
-
         const item = document.createElement("div");
         item.className = "item";
         item.innerHTML = `
@@ -26,15 +33,18 @@ function renderCarrito(carrito) {
 }
 
 function cambiarCantidad(nombre, cambio) {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || {};
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    if (!usuario?.email) return;
+
+    const clave = `carrito_${usuario.email}`;
+    const carrito = JSON.parse(localStorage.getItem(clave)) || {};
     if (!carrito[nombre]) return;
 
     carrito[nombre].cantidad += cambio;
-
     if (carrito[nombre].cantidad <= 0) {
         delete carrito[nombre];
     }
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem(clave, JSON.stringify(carrito));
     renderCarrito(carrito);
 }

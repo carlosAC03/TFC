@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
-            : "https://tfc-2gv2.onrender.com"; // ← Tu backend real en Render
+            : "https://tfc-2gv2.onrender.com";
 
         const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
@@ -48,7 +48,14 @@ function renderProductos() {
 }
 
 function añadirCarrito(index) {
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || {};
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    if (!usuario?.email) {
+        alert("Debes iniciar sesión para añadir productos al carrito.");
+        return;
+    }
+
+    const clave = `carrito_${usuario.email}`;
+    const carrito = JSON.parse(localStorage.getItem(clave)) || {};
     const prod = productos[index];
     const nombre = prod.nombre;
 
@@ -61,6 +68,6 @@ function añadirCarrito(index) {
         };
     }
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem(clave, JSON.stringify(carrito));
     alert(`${nombre} añadido al carrito`);
 }

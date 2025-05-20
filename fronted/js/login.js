@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const API_URL = window.location.hostname.includes("localhost")
     ? "http://localhost:4000"
-    : "https://tfc-2gv2.onrender.com"; // Tu backend real en Render
+    : "https://tfc-2gv2.onrender.com";
 
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const loginSection = document.getElementById("login-section");
@@ -45,3 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function logout() {
+  localStorage.removeItem("usuario");
+  window.location.reload();
+}

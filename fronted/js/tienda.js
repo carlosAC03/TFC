@@ -34,30 +34,34 @@ function renderProductos() {
         return;
     }
 
-    productosFiltrados.forEach((p, i) => {
+    productosFiltrados.forEach((p) => {
         contenedor.innerHTML += `
             <div class="producto">
                 <img src="${p.imagen}" alt="${p.nombre}">
                 <h4>${p.nombre}</h4>
                 <p>${p.descripcion}</p>
                 <span>${p.precio.toFixed(2)} €</span>
-                <button onclick="añadirCarrito(${i})">Añadir al carrito</button>
+                <button onclick="añadirCarritoPorNombre('${p.nombre.replace(/'/g, "\\'")}')">Añadir al carrito</button>
             </div>
         `;
     });
 }
 
-function añadirCarrito(index) {
+function añadirCarritoPorNombre(nombre) {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario?.email) {
         alert("Debes iniciar sesión para añadir productos al carrito.");
         return;
     }
 
+    const prod = productos.find(p => p.nombre === nombre);
+    if (!prod) {
+        alert("Producto no encontrado.");
+        return;
+    }
+
     const clave = `carrito_${usuario.email}`;
     const carrito = JSON.parse(localStorage.getItem(clave)) || {};
-    const prod = productos[index];
-    const nombre = prod.nombre;
 
     if (carrito[nombre]) {
         carrito[nombre].cantidad += 1;

@@ -9,7 +9,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         const res = await fetch(`${API_URL}/productos`);
         const data = await res.json();
         productos.push(...data);
+
         renderProductos();
+
+        // Activar barra de búsqueda
+        const buscador = document.querySelector('.search-input');
+        buscador.addEventListener('input', () => {
+            const texto = buscador.value.toLowerCase();
+            renderProductos(texto);
+        });
+
     } catch (err) {
         console.error("Error al cargar productos:", err);
     }
@@ -20,21 +29,27 @@ function getCategoriaDesdeURL() {
     return params.get("categoria");
 }
 
-function renderProductos() {
+function renderProductos(filtroTexto = "") {
     const contenedor = document.getElementById("productos");
     contenedor.innerHTML = "";
     const categoriaSeleccionada = getCategoriaDesdeURL();
 
-    const productosFiltrados = categoriaSeleccionada
+    let productosFiltrados = categoriaSeleccionada
         ? productos.filter(p => p.categoria === categoriaSeleccionada)
         : productos;
 
+    if (filtroTexto) {
+        productosFiltrados = productosFiltrados.filter(p =>
+            p.nombre.toLowerCase().includes(filtroTexto)
+        );
+    }
+
     if (productosFiltrados.length === 0) {
-        contenedor.innerHTML = `<p>No hay productos disponibles para esta categoría.</p>`;
+        contenedor.innerHTML = `<p>No hay productos que coincidan con tu búsqueda.</p>`;
         return;
     }
 
-    productosFiltrados.forEach((p) => {
+    productosFiltrados.forEach(p => {
         contenedor.innerHTML += `
             <div class="producto">
                 <img src="${p.imagen}" alt="${p.nombre}">

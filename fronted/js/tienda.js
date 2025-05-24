@@ -1,6 +1,8 @@
 const productos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const loader = document.getElementById("loader");
+    loader.style.display = "block"; 
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
@@ -21,6 +23,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
         console.error("Error al cargar productos:", err);
+    }finally {
+        if (loader) loader.style.display = "none"; 
     }
 });
 

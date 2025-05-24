@@ -386,6 +386,27 @@ header {
     background-color: #689F38;
 }
 
+.loader {
+    text-align: center;
+    font-size: 20px;
+    color: #228B22;
+    margin-top: 30px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.dots::after {
+    content: "";
+    display: inline-block;
+    animation: dotsAnim 1.5s steps(4, end) infinite;
+}
+
+@keyframes dotsAnim {
+    0% { content: ""; }
+    25% { content: "."; }
+    50% { content: ".."; }
+    75% { content: "..."; }
+    100% { content: ""; }
+}
 
 @media (max-width: 600px) {
     .categoria img {

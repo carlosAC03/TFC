@@ -5,6 +5,13 @@ const API_URL = location.hostname === "localhost"
 let productos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
+    // Mostrar loader
+    const loader = document.createElement("div");
+    loader.id = "loader";
+    loader.className = "loader";
+    loader.innerHTML = 'Cargando tienda<span class="dots"></span>';
+    document.body.insertBefore(loader, document.getElementById("productos"));
+
     try {
         const res = await fetch(`${API_URL}/productos/novedades`);
         const data = await res.json();
@@ -23,6 +30,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
         console.error("Error al cargar novedades:", err);
+    } finally {
+        // Ocultar loader
+        if (loader) loader.remove();
     }
 });
 

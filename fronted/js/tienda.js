@@ -1,5 +1,15 @@
 const productos = [];
 
+function getCategoriaDesdeURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("categoria");
+}
+
+function getBusquedaDesdeURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("busqueda") || "";
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const loader = document.getElementById("loader");
     loader.style.display = "block"; 
@@ -12,7 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json();
         productos.push(...data);
 
-        renderProductos();
+        const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
+        renderProductos(textoBusqueda);
 
         const buscador = document.querySelector('.search-input');
         buscador.addEventListener('input', () => {
@@ -26,11 +37,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (loader) loader.style.display = "none"; 
     }
 });
-
-function getCategoriaDesdeURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("categoria");
-}
 
 function renderProductos(filtroTexto = "") {
     const contenedor = document.getElementById("productos");

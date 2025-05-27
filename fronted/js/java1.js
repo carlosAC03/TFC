@@ -11,6 +11,7 @@ function changeImage() {
 setInterval(changeImage, 3000);
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Menú lateral de filtros
     const filtroBtn = document.getElementById('toggleMenu');
     const filtroMenu = document.querySelector('.filtro-menu');
     const overlay = document.querySelector('.overlay');
@@ -34,5 +35,27 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.classList.remove('active');
         });
     }
+
+    // Redirección desde buscador si no estás en tienda, ofertas o novedades
+    const searchInput = document.querySelector('.search-input');
+    const currentPage = window.location.pathname;
+
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (!query) return;
+
+                const isTienda = currentPage.includes('tienda.html');
+                const isOfertas = currentPage.includes('ofertas.html');
+                const isNovedades = currentPage.includes('novedades.html');
+
+                if (!isTienda && !isOfertas && !isNovedades) {
+                    window.location.href = `tienda.html?busqueda=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+    }
 });
+
 

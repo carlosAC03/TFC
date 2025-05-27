@@ -34,7 +34,6 @@
     font-size: 16px;
 }
 
-/* Estilo del botón de acceder y cerrar sesión */
 .login-btn {
     background-color: #228B22;
     color: white;
@@ -44,6 +43,10 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    display: block;         /* importante para ocupar línea completa */
+    margin-top: 20px;       /* espacio respecto al input anterior */
+    text-align: left;       /* alinear texto a la izquierda */
 }
 
 .login-btn:hover {

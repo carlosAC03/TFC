@@ -36,13 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Redirección desde buscador si no estás en tienda, ofertas o novedades
+    // Redirección desde el buscador si no estás en tienda, ofertas o novedades
     const searchInput = document.querySelector('.search-input');
     const currentPage = window.location.pathname;
 
     if (searchInput) {
         searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
+                e.preventDefault(); // Evita recargar la página antes de redirigir
+
                 const query = searchInput.value.trim();
                 if (!query) return;
 
@@ -51,11 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isNovedades = currentPage.includes('novedades.html');
 
                 if (!isTienda && !isOfertas && !isNovedades) {
-                    window.location.href = `tienda.html?busqueda=${encodeURIComponent(query)}`;
+                    window.location.href = `html/tienda.html?busqueda=${encodeURIComponent(query)}`;
                 }
             }
         });
     }
 });
-
-

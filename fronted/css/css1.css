@@ -400,6 +400,17 @@ header {
     animation: dotsAnim 1.5s steps(4, end) infinite;
 }
 
+.menu-icon {
+    background-color: transparent;
+    border: none;
+    font-size: 28px;
+    color: #000;
+    cursor: pointer;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+}
+
 @keyframes dotsAnim {
     0% { content: ""; }
     25% { content: "."; }

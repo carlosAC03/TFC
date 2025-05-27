@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         renderProductos();
 
-        // Activar barra de búsqueda
         const buscador = document.querySelector('.search-input');
         buscador.addEventListener('input', () => {
             const texto = buscador.value.toLowerCase();
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
         console.error("Error al cargar productos:", err);
-    }finally {
+    } finally {
         if (loader) loader.style.display = "none"; 
     }
 });
@@ -70,6 +69,7 @@ function añadirCarritoPorNombre(nombre) {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario?.email) {
         alert("Debes iniciar sesión para añadir productos al carrito.");
+        window.location.href = "login.html";
         return;
     }
 

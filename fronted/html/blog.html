@@ -9,48 +9,46 @@
 </head>
 <body>
 
-    <!-- Header de index.html -->
-    <header>
-        <div class="nav-container">
-            <a href="../index.html">
-                <img src="../imagenes/Logo.png" alt="Logo" class="logo">
-            </a>
-            <div class="search-wrapper">
-                <button class="search-icon">
-                    <div class="lupa">
-                        <img src="../imagenes/lupa.png" alt="Buscar">
-                    </div>
-                </button>
-                <input type="text" class="search-input" placeholder="Buscar en el blog...">
-            </div>
-
-            <div class="iconos-header">
-                <a href="login.html" class="icono-header">
-                    <img src="../imagenes/login.png" alt="Usuario">
-                </a>
-                <a href="carrito.html" class="icono-header">
-                    <img src="../imagenes/carrito.png" alt="Carrito">
-                </a>
-            </div>
+<header>
+    <div class="nav-container">
+        <a href="../index.html">
+            <img src="../imagenes/Logo.png" alt="Logo" class="logo">
+        </a>
+        <div class="search-wrapper">
+            <button class="search-icon">
+                <div class="lupa">
+                    <img src="../imagenes/lupa.png" alt="Buscar">
+                </div>
+            </button>
+            <input type="text" class="search-input" placeholder="Buscar en el blog...">
         </div>
 
-        <!-- ⬇ Menú de navegación debajo de logo + buscador -->
-        <nav class="main-menu">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                    <li><a href="tienda.html">Tienda</a></li>
-                    <li><a href="novedades.html">Novedades</a></li>
-                    <li><a href="ofertas.html">Ofertas</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    
+        <div class="iconos-header">
+            <button class="menu-icon" id="toggleMenu">&#9776;</button>
+            <a href="login.html" class="icono-header">
+                <img src="../imagenes/login.png" alt="Usuario">
+            </a>
+            <a href="carrito.html" class="icono-header">
+                <img src="../imagenes/carrito.png" alt="Carrito">
+            </a>
+        </div>
+    </div>
 
-    <!-- Sección de Blog -->
-    <section class="blog-section">
-        <h1 class="blog-title">Últimos Artículos</h1>
-        <div class="blog-wrapper">
+    <nav class="main-menu">
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="tienda.html">Tienda</a></li>
+            <li><a href="novedades.html">Novedades</a></li>
+            <li><a href="ofertas.html">Ofertas</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="blog-section">
+    <h1 class="blog-title">Últimos Artículos</h1>
+    <div class="blog-wrapper">
         <div class="blog-grid">
             <div class="blog-card">
                 <img src="../imagenes/aperitivos.jpg" alt="Artículo 1">
@@ -78,23 +76,40 @@
             </div>
         </div>
     </div>
-    </section>
+</section>
 
-    <!-- Footer existente -->
-    <footer class="footer">
-        <h3>Contacta con nosotros</h3>
-        <p><span class="icon">📞</span> 722 10 84 65</p>
-        <p><span class="icon">💬</span> WhatsApp</p>
-        <p><span class="icon">✉️</span> info@supermercadosacosta.es</p>
-        <p><span class="icon">⏰</span> De lunes a sábados de 8 a 2h y de 5 a 9:30h</p>
-        <h4>Síguenos:</h4>
-        <div class="social-icons">
-            <a href="#"><span class="circle">📘</span></a>
-            <a href="#"><span class="circle">🐦</span></a>
-            <a href="#"><span class="circle">📸</span></a>
-        </div>
-    </footer>
+<!-- ✅ Menú lateral de filtros añadido -->
+<div class="filtro-menu">
+    <button class="cerrar-menu">&times;</button>
+    <h3>Filtrar por categoría</h3>
+    <ul>
+        <li><a href="tienda.html?categoria=Aperitivos">Aperitivos</a></li>
+        <li><a href="tienda.html?categoria=Carnes Vegetales">Carnes Vegetales</a></li>
+        <li><a href="tienda.html?categoria=Arroz, Legumbres y Cereal">Arroz, Legumbres y Cereal</a></li>
+        <li><a href="tienda.html?categoria=Chocolates">Chocolates</a></li>
+        <li><a href="tienda.html?categoria=Condimentos y Semillas">Condimentos y Semillas</a></li>
+        <li><a href="tienda.html?categoria=Galletas y Bollería">Galletas y Bollería</a></li>
+        <li><a href="tienda.html?categoria=Harinas y Levadura">Harinas y Levadura</a></li>
+    </ul>
+</div>
 
-    <script src="../js/java1.js"></script>
+<div class="overlay"></div>
+
+<footer class="footer">
+    <h3>Contacta con nosotros</h3>
+    <p><span class="icon">📞</span> 722 10 84 65</p>
+    <p><span class="icon">💬</span> WhatsApp</p>
+    <p><span class="icon">✉️</span> info@supermercadosacosta.es</p>
+    <p><span class="icon">⏰</span> De lunes a sábados de 8 a 2h y de 5 a 9:30h</p>
+    <h4>Síguenos:</h4>
+    <div class="social-icons">
+        <a href="#"><span class="circle">📘</span></a>
+        <a href="#"><span class="circle">🐦</span></a>
+        <a href="#"><span class="circle">📸</span></a>
+    </div>
+</footer>
+
+<!-- ✅ Script para menú lateral -->
+<script src="../js/java1.js"></script>
 </body>
 </html>

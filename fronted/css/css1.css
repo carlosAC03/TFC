@@ -5,7 +5,6 @@ body {
     background-color: #FAF8F4;
 }
 
-
 header {
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -14,7 +13,6 @@ header {
     z-index: 1000;
 }
 
-/* Contenedor superior con logo, búsqueda e iconos */
 .nav-container {
     display: flex;
     align-items: center;
@@ -75,16 +73,31 @@ header {
     object-fit: contain;
 }
 
-/* Iconos de usuario y carrito */
+/* Iconos en header */
 .iconos-header {
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    background-color: transparent;
+    border: none;
+    font-size: 28px;
+    color: #000;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .icono-header img {
     width: 32px;
     height: 32px;
+    object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -93,9 +106,8 @@ header {
     transform: scale(1.1);
 }
 
-/* Menú principal debajo del nav-container */
 .main-menu {
-    background-color: #228B22; /* mismo verde que la lupa */
+    background-color: #228B22;
     padding: 10px 20px;
     display: flex;
     justify-content: center;
@@ -112,11 +124,12 @@ header {
 
 .main-menu ul li a {
     text-decoration: none;
-    color: white; /* texto blanco por defecto */
+    color: white;
     font-weight: 500;
     padding: 8px 12px;
     transition: color 0.3s ease;
 }
+
 .main-menu ul li a:hover {
     color: #800000;
 }
@@ -127,6 +140,7 @@ header {
     height: 500px;
     overflow: hidden;
 }
+
 .carousel-container {
     position: relative;
     width: 100%;
@@ -179,7 +193,6 @@ header {
     filter: brightness(0.7);
 }
 
-/* Tooltip centrado */
 .categoria::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -221,24 +234,6 @@ header {
 
 .categoria:hover::before {
     opacity: 1;
-}
-
-.btn-filtros {
-    display: block;
-    margin: 40px auto;
-    padding: 12px 24px;
-    background-color: #006400;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.btn-filtros:hover {
-    transform: scale(1.05);
-    background-color: #228B22;
 }
 
 .filtro-menu {
@@ -398,17 +393,6 @@ header {
     content: "";
     display: inline-block;
     animation: dotsAnim 1.5s steps(4, end) infinite;
-}
-
-.menu-icon {
-    background-color: transparent;
-    border: none;
-    font-size: 28px;
-    color: #000;
-    cursor: pointer;
-    padding: 4px 10px;
-    display: flex;
-    align-items: center;
 }
 
 @keyframes dotsAnim {

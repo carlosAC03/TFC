@@ -106,10 +106,12 @@ body {
 }
 
 .etiqueta-novedad {
-    width: 35px; /* antes era 50px */
-    height: auto;
-    display: block;
-    margin: 6px auto 4px auto; /* centrado horizontal con espacio */
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    object-fit: contain;
+    margin: 4px 0;
+    vertical-align: middle;
 }
 
 .precio-oferta {

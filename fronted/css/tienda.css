@@ -87,4 +87,21 @@ body {
     font-weight: bold;
 }
 
+.producto button {
+    background-color: #228B22; /* verde oscuro */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* igual de ancho que el contenedor del producto */
+    box-sizing: border-box;
+}
+
+.producto button:hover {
+    background-color: #1a701a; /* un tono más oscuro al pasar el ratón */
+}
+
 

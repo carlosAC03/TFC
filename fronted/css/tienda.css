@@ -106,12 +106,11 @@ body {
 }
 
 .etiqueta-novedad {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     display: block;
-    margin: 6px auto -4px auto;
+    margin: 6px auto -2px auto;
     object-fit: contain;
-    filter: brightness(0) contrast(1.2);
 }
 
 

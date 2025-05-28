@@ -127,8 +127,12 @@ function renderProductos(filtroTexto = "") {
                 <img src="${p.imagen}" alt="${p.nombre}">
                 <h4>${p.nombre}</h4>
                 <p>${p.descripcion}</p>
-                ${p.novedad ? `<img src="../imagenes/new.png" alt="Novedad" class="etiqueta-novedad">` : ""}
-                ${p.oferta ? `
+                ${p.novedad ? `
+                    <div class="precio-con-novedad">
+                        <img src="../imagenes/new.png" alt="Novedad" class="etiqueta-novedad">
+                        <span>${p.precio.toFixed(2)} €</span>
+                    </div>
+                ` : p.oferta ? `
                     <p class="precio-oferta">
                         <span class="tachado">${p.precioOriginal.toFixed(2)} €</span>
                         <span class="precio-descuento">${p.precio.toFixed(2)} €</span>

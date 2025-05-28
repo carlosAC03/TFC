@@ -150,15 +150,16 @@ body {
 .novedad-texto {
     display: block;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
-    color: #fff; /* blanco puro */
-    background-color: #006400; /* verde oscuro fuerte */
-    padding: 2px 8px;
-    border-radius: 20px;
+    color: #ffffff;
+    background-color: #28a745; /* verde más claro y legible */
+    padding: 3px 10px;
+    border-radius: 12px;
     width: fit-content;
     margin: 6px auto;
     letter-spacing: 1px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); /* para que se separe visualmente del fondo */
 }
 
 

@@ -405,20 +405,38 @@ header {
 
 /* Ocultar el menú original en móvil */
 @media (max-width: 768px) {
-  .main-menu {
-    display: none;
-  }
-
   .menu-toggle {
     display: block;
+    width: 100%; /* se alarga a todo el ancho */
     background-color: #228B22;
     color: white;
     font-size: 16px;
-    padding: 8px 12px;
+    padding: 10px 0;
     border: none;
     cursor: pointer;
-    margin: 10px auto;
-    border-radius: 6px;
+    border-radius: 0; /* sin bordes redondeados */
+    text-align: center;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .iconos-header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .search-wrapper {
+    width: 100%;
+    margin-top: 60px;
+    margin-bottom: 10px;
   }
 }
 

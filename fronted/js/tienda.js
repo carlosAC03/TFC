@@ -1,4 +1,6 @@
 const productos = [];
+let paginaActual = 1;
+const limite = 12;
 
 function getCategoriaDesdeURL() {
     const params = new URLSearchParams(window.location.search);
@@ -12,15 +14,15 @@ function getBusquedaDesdeURL() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const loader = document.getElementById("loader");
-    loader.style.display = "block"; 
+    loader.style.display = "block";
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
             : "https://tfc-2gv2.onrender.com";
 
-        const res = await fetch(`${API_URL}/productos`);
-        const data = await res.json();
-        productos.push(...data);
+        const res = await fetch(`${API_URL}/productos?page=${paginaActual}&limit=${limite}`);
+        const { productos: productosPaginados, total } = await res.json();
+        productos.push(...productosPaginados);
 
         const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
         renderProductos(textoBusqueda);
@@ -31,12 +33,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderProductos(texto);
         });
 
+        renderPaginacion(total);
+
     } catch (err) {
         console.error("Error al cargar productos:", err);
     } finally {
-        if (loader) loader.style.display = "none"; 
+        if (loader) loader.style.display = "none";
     }
 });
+
+function renderPaginacion(total) {
+    const totalPaginas = Math.ceil(total / limite);
+    const paginador = document.getElementById("paginacion");
+    if (!paginador) return;
+
+    paginador.innerHTML = "";
+    for (let i = 1; i <= totalPaginas; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.className = i === paginaActual ? "activo" : "";
+        btn.addEventListener("click", () => {
+            window.location.search = `?page=${i}`;
+        });
+        paginador.appendChild(btn);
+    }
+}
 
 function renderProductos(filtroTexto = "") {
     const contenedor = document.getElementById("productos");

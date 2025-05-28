@@ -6,12 +6,10 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// ✅ CORS: permitir peticiones desde el frontend en producción
 app.use(cors({
-  origin: "https://tfc-1.onrender.com" // tu frontend
+  origin: "https://tfc-1.onrender.com"
 }));
 
-// 🔗 Conexión a MongoDB
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
@@ -21,20 +19,31 @@ app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// 📦 Obtener todos los productos
+// 📦 Obtener productos con paginación
 app.get("/productos", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 12;
+  const skip = (page - 1) * limit;
+
   try {
     await client.connect();
     const db = client.db(dbName);
-    const productos = await db.collection("producto").find().toArray();
-    res.json(productos);
+    const productosCollection = db.collection("producto");
+
+    const total = await productosCollection.countDocuments();
+    const productos = await productosCollection.find()
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    res.json({ total, productos });
   } catch (err) {
     console.error("Error al obtener productos:", err);
     res.status(500).send("Error al obtener productos");
   }
 });
 
-// 🛒 Obtener productos en oferta
+// 🛒 Ofertas y novedades (igual que antes)
 app.get("/productos/ofertas", async (req, res) => {
   try {
     await client.connect();
@@ -47,7 +56,6 @@ app.get("/productos/ofertas", async (req, res) => {
   }
 });
 
-// 🆕 Obtener productos nuevos (novedades)
 app.get("/productos/novedades", async (req, res) => {
   try {
     await client.connect();
@@ -60,7 +68,7 @@ app.get("/productos/novedades", async (req, res) => {
   }
 });
 
-// 🔐 Login de usuario
+// 🔐 Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -69,14 +77,10 @@ app.post("/login", async (req, res) => {
     const usuarios = db.collection("usuarios");
 
     const usuario = await usuarios.findOne({ email });
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
+    if (!usuario) return res.status(404).json({ message: "Usuario no encontrado" });
 
     const esValida = await bcrypt.compare(password, usuario.password);
-    if (!esValida) {
-      return res.status(401).json({ message: "Contraseña incorrecta" });
-    }
+    if (!esValida) return res.status(401).json({ message: "Contraseña incorrecta" });
 
     res.json({ message: "Login exitoso", email });
   } catch (err) {
@@ -85,7 +89,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// 📝 Registro de usuario
+// 📝 Registro
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -94,9 +98,7 @@ app.post("/register", async (req, res) => {
     const usuarios = db.collection("usuarios");
 
     const existente = await usuarios.findOne({ email });
-    if (existente) {
-      return res.status(400).json({ message: "Usuario ya registrado" });
-    }
+    if (existente) return res.status(400).json({ message: "Usuario ya registrado" });
 
     const hashed = await bcrypt.hash(password, 10);
     await usuarios.insertOne({ email, password: hashed });
@@ -108,7 +110,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// 🚀 Puerto dinámico para Render o local
+// 🚀 Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);

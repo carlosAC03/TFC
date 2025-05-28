@@ -147,4 +147,19 @@ body {
     font-size: 18px;
 }
 
+.novedad-texto {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: #228B22;
+    padding: 2px 8px;
+    border-radius: 20px;
+    width: fit-content;
+    margin: 6px auto;
+    letter-spacing: 1px;
+}
+
+
 

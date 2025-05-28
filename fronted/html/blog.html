@@ -1,101 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Supermercados Acosta</title>
-    <link rel="stylesheet" href="../css/css1.css">
-    <link rel="stylesheet" href="../css/blog.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Supermercados Acosta</title>
+  <link rel="stylesheet" href="../css/css1.css">
+  <link rel="stylesheet" href="../css/blog.css">
 </head>
 <body>
 
-<header>
+  <header>
     <div class="nav-container">
-        <a href="../index.html">
-            <img src="../imagenes/Logo.png" alt="Logo" class="logo">
+      <a href="../index.html">
+        <img src="../imagenes/Logo.png" alt="Logo" class="logo">
+      </a>
+      <div class="search-wrapper">
+        <button class="search-icon">
+          <div class="lupa">
+            <img src="../imagenes/lupa.png" alt="Buscar">
+          </div>
+        </button>
+        <input type="text" class="search-input" placeholder="Buscar en el blog...">
+      </div>
+      <div class="iconos-header">
+        <button class="menu-icon" id="toggleMenu">&#9776;</button>
+        <a href="login.html" class="icono-header">
+          <img src="../imagenes/login.png" alt="Usuario">
         </a>
-        <div class="search-wrapper">
-            <button class="search-icon">
-                <div class="lupa">
-                    <img src="../imagenes/lupa.png" alt="Buscar">
-                </div>
-            </button>
-            <input type="text" class="search-input" placeholder="Buscar productos ...">
-        </div>
-
-        <div class="iconos-header">
-            <button class="menu-icon" id="toggleMenu">&#9776;</button>
-            <a href="login.html" class="icono-header">
-                <img src="../imagenes/login.png" alt="Usuario">
-            </a>
-            <a href="carrito.html" class="icono-header">
-                <img src="../imagenes/carrito.png" alt="Carrito">
-            </a>
-        </div>
+        <a href="carrito.html" class="icono-header">
+          <img src="../imagenes/carrito.png" alt="Carrito">
+        </a>
+      </div>
     </div>
 
     <nav class="main-menu">
-        <ul>
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="tienda.html">Tienda</a></li>
-            <li><a href="novedades.html">Novedades</a></li>
-            <li><a href="ofertas.html">Ofertas</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-        </ul>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="novedades.html">Novedades</a></li>
+        <li><a href="ofertas.html">Ofertas</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
     </nav>
-</header>
+  </header>
 
-<section class="blog-section">
+  <section class="blog-section">
     <h1 class="blog-title">Últimos Artículos</h1>
     <div class="blog-wrapper">
-        <div class="blog-grid">
-            <div class="blog-card">
-                <img src="../imagenes/aperitivos.jpg" alt="Artículo 1">
-                <div class="blog-card-content">
-                    <h3>Snacks saludables para picar entre horas</h3>
-                    <p>Descubre alternativas ligeras, crujientes y sabrosas que no comprometen tu dieta.</p>
-                    <a href="#">Leer más →</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="../imagenes/Chocolates.jpg" alt="Artículo 2">
-                <div class="blog-card-content">
-                    <h3>El lado oscuro del chocolate (¡y saludable!)</h3>
-                    <p>Exploramos los beneficios del cacao puro y cómo integrarlo en tus postres favoritos.</p>
-                    <a href="#">Leer más →</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="../imagenes/Carnes_vegetales.jpeg" alt="Artículo 3">
-                <div class="blog-card-content">
-                    <h3>Carnes vegetales: sabor sin sacrificio</h3>
-                    <p>¿Vale la pena? Revisamos marcas y te contamos cuáles se acercan más a la carne real.</p>
-                    <a href="#">Leer más →</a>
-                </div>
-            </div>
+      <div class="blog-grid">
+
+        <div class="blog-card">
+          <img src="../imagenes/aperitivos.jpg" alt="Artículo 1">
+          <div class="blog-card-content">
+            <h3>Snacks saludables para picar entre horas</h3>
+            <p>
+              Descubre alternativas ligeras, crujientes y sabrosas que no comprometen tu dieta.
+              <span class="extra-text">
+                Prueba chips de kale, garbanzos especiados al horno, o barritas de semillas caseras.
+                Estos snacks no solo son deliciosos, también están cargados de nutrientes y sin aditivos.
+              </span>
+            </p>
+            <a href="#" class="leer-mas">Leer más →</a>
+          </div>
         </div>
+
+        <div class="blog-card">
+          <img src="../imagenes/Chocolates.jpg" alt="Artículo 2">
+          <div class="blog-card-content">
+            <h3>El lado oscuro del chocolate (¡y saludable!)</h3>
+            <p>
+              Exploramos los beneficios del cacao puro y cómo integrarlo en tus postres favoritos.
+              <span class="extra-text">
+                El chocolate negro con más del 70% de cacao aporta antioxidantes y mejora el estado de ánimo.
+                Aprende a distinguir ingredientes buenos de los ultraprocesados.
+              </span>
+            </p>
+            <a href="#" class="leer-mas">Leer más →</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <img src="../imagenes/Carnes_vegetales.jpeg" alt="Artículo 3">
+          <div class="blog-card-content">
+            <h3>Carnes vegetales: sabor sin sacrificio</h3>
+            <p>
+              ¿Vale la pena? Revisamos marcas y te contamos cuáles se acercan más a la carne real.
+              <span class="extra-text">
+                Comparamos textura, sabor, ingredientes y valor nutricional entre las mejores marcas del mercado.
+                Ideal si buscas opciones sin crueldad animal y más sostenibles.
+              </span>
+            </p>
+            <a href="#" class="leer-mas">Leer más →</a>
+          </div>
+        </div>
+
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ✅ Menú lateral de filtros añadido -->
-<div class="filtro-menu">
-    <button class="cerrar-menu">&times;</button>
-    <h3>Filtrar por categoría</h3>
-    <ul>
-        <li><a href="tienda.html?categoria=Aperitivos">Aperitivos</a></li>
-        <li><a href="tienda.html?categoria=Carnes Vegetales">Carnes Vegetales</a></li>
-        <li><a href="tienda.html?categoria=Arroz, Legumbres y Cereal">Arroz, Legumbres y Cereal</a></li>
-        <li><a href="tienda.html?categoria=Chocolates">Chocolates</a></li>
-        <li><a href="tienda.html?categoria=Condimentos y Semillas">Condimentos y Semillas</a></li>
-        <li><a href="tienda.html?categoria=Galletas y Bollería">Galletas y Bollería</a></li>
-        <li><a href="tienda.html?categoria=Harinas y Levadura">Harinas y Levadura</a></li>
-    </ul>
-</div>
-
-<div class="overlay"></div>
-
-<footer class="footer">
+  <footer class="footer">
     <h3>Contacta con nosotros</h3>
     <p><span class="icon">📞</span> 722 10 84 65</p>
     <p><span class="icon">💬</span> WhatsApp</p>
@@ -103,13 +107,12 @@
     <p><span class="icon">⏰</span> De lunes a sábados de 8 a 2h y de 5 a 9:30h</p>
     <h4>Síguenos:</h4>
     <div class="social-icons">
-        <a href="#"><span class="circle">📘</span></a>
-        <a href="#"><span class="circle">🐦</span></a>
-        <a href="#"><span class="circle">📸</span></a>
+      <a href="#"><span class="circle">📘</span></a>
+      <a href="#"><span class="circle">🐦</span></a>
+      <a href="#"><span class="circle">📸</span></a>
     </div>
-</footer>
+  </footer>
 
-<!-- ✅ Script para menú lateral -->
-<script src="../js/java1.js"></script>
+  <script src="../js/java1.js"></script>
 </body>
 </html>

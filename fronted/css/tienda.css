@@ -54,5 +54,33 @@ body {
     color: #228B22;
 }
 
+.paginacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 30px 0;
+}
+
+.paginacion button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.paginacion button:hover {
+    background-color: #c0c0c0;
+}
+
+.paginacion button.activo {
+    background-color: #228B22;
+    color: white;
+    font-weight: bold;
+}
+
 
 

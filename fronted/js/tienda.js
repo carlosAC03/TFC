@@ -25,11 +25,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             ? "http://localhost:4000"
             : "https://tfc-2gv2.onrender.com";
 
-        const res = await fetch(`${API_URL}/productos?page=${paginaActual}&limit=${limite}`);
-        const { productos: productosPaginados, total } = await res.json();
-        productos.push(...productosPaginados);
-
         const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
+        const categoria = getCategoriaDesdeURL();
+
+        // Si hay búsqueda o categoría, cargar todos los productos sin paginación
+        const url = textoBusqueda || categoria
+            ? `${API_URL}/productos?page=1&limit=1000`
+            : `${API_URL}/productos?page=${paginaActual}&limit=${limite}`;
+
+        const res = await fetch(url);
+        const { productos: data, total } = await res.json();
+        productos.push(...data);
+
         renderProductos(textoBusqueda);
 
         const buscador = document.querySelector('.search-input');
@@ -38,7 +45,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderProductos(texto);
         });
 
-        renderPaginacion(total);
+        // Solo mostrar paginación si no hay filtros
+        if (!textoBusqueda && !categoria) {
+            renderPaginacion(total);
+        }
 
     } catch (err) {
         console.error("Error al cargar productos:", err);

@@ -106,15 +106,17 @@ body {
 }
 
 .etiqueta-novedad {
-    width: 50px;
+    width: 35px; /* antes era 50px */
+    height: auto;
     display: block;
-    margin: 8px 0;
+    margin: 6px auto 4px auto; /* centrado horizontal con espacio */
 }
 
 .precio-oferta {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     margin: 10px 0;
 }
 
@@ -122,12 +124,15 @@ body {
     text-decoration: line-through;
     color: red;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .precio-oferta .precio-descuento {
     color: #228B22;
     font-weight: bold;
+    font-size: 18px;
 }
+
 
 
 

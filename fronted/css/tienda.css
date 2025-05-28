@@ -152,14 +152,15 @@ body {
     text-align: center;
     font-size: 12px;
     font-weight: bold;
-    color: white;
-    background-color: #228B22;
+    color: #fff; /* blanco puro */
+    background-color: #006400; /* verde oscuro fuerte */
     padding: 2px 8px;
     border-radius: 20px;
     width: fit-content;
     margin: 6px auto;
     letter-spacing: 1px;
 }
+
 
 
 

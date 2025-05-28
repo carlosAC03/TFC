@@ -1,5 +1,5 @@
 const productos = [];
-let paginaActual = 1;
+let paginaActual = getPaginaDesdeURL();
 const limite = 12;
 
 function getCategoriaDesdeURL() {
@@ -10,6 +10,11 @@ function getCategoriaDesdeURL() {
 function getBusquedaDesdeURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("busqueda") || "";
+}
+
+function getPaginaDesdeURL() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get("page")) || 1;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -48,15 +53,49 @@ function renderPaginacion(total) {
     if (!paginador) return;
 
     paginador.innerHTML = "";
+
+    // ⏮ Primera
+    const btnPrimera = document.createElement("button");
+    btnPrimera.textContent = "⏮";
+    btnPrimera.disabled = paginaActual === 1;
+    btnPrimera.addEventListener("click", () => cambiarPagina(1));
+    paginador.appendChild(btnPrimera);
+
+    // ◀ Anterior
+    const btnAnterior = document.createElement("button");
+    btnAnterior.textContent = "◀";
+    btnAnterior.disabled = paginaActual === 1;
+    btnAnterior.addEventListener("click", () => cambiarPagina(paginaActual - 1));
+    paginador.appendChild(btnAnterior);
+
+    // Números
     for (let i = 1; i <= totalPaginas; i++) {
         const btn = document.createElement("button");
         btn.textContent = i;
-        btn.className = i === paginaActual ? "activo" : "";
-        btn.addEventListener("click", () => {
-            window.location.search = `?page=${i}`;
-        });
+        if (i === paginaActual) btn.classList.add("activo");
+        btn.addEventListener("click", () => cambiarPagina(i));
         paginador.appendChild(btn);
     }
+
+    // ▶ Siguiente
+    const btnSiguiente = document.createElement("button");
+    btnSiguiente.textContent = "▶";
+    btnSiguiente.disabled = paginaActual === totalPaginas;
+    btnSiguiente.addEventListener("click", () => cambiarPagina(paginaActual + 1));
+    paginador.appendChild(btnSiguiente);
+
+    // ⏭ Última
+    const btnUltima = document.createElement("button");
+    btnUltima.textContent = "⏭";
+    btnUltima.disabled = paginaActual === totalPaginas;
+    btnUltima.addEventListener("click", () => cambiarPagina(totalPaginas));
+    paginador.appendChild(btnUltima);
+}
+
+function cambiarPagina(nuevaPagina) {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", nuevaPagina);
+    window.location.search = params.toString();
 }
 
 function renderProductos(filtroTexto = "") {

@@ -105,18 +105,13 @@ body {
     background-color: #1a701a; /* un tono más oscuro al pasar el ratón */
 }
 
-.producto {
-    position: relative;
-}
-
 .etiqueta-novedad {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 22px;
-    height: 22px;
+    width: 14px;
+    height: 14px;
+    display: block;
+    margin: 6px auto -4px auto;
     object-fit: contain;
-    z-index: 10;
+    filter: brightness(0) contrast(1.2);
 }
 
 

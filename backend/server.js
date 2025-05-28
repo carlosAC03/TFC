@@ -6,20 +6,21 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
+// ✅ Permitir peticiones desde tu frontend de Render
 app.use(cors({
-  origin: "https://tfc-1.onrender.com"
+  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"]
 }));
 
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// 🌐 Ruta de prueba
+// Ruta base de prueba
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// 📦 Obtener productos con paginación
+// Productos con paginación
 app.get("/productos", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 12;
@@ -43,7 +44,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// 🛒 Ofertas y novedades (igual que antes)
+// Productos en oferta
 app.get("/productos/ofertas", async (req, res) => {
   try {
     await client.connect();
@@ -56,6 +57,7 @@ app.get("/productos/ofertas", async (req, res) => {
   }
 });
 
+// Novedades
 app.get("/productos/novedades", async (req, res) => {
   try {
     await client.connect();
@@ -68,7 +70,7 @@ app.get("/productos/novedades", async (req, res) => {
   }
 });
 
-// 🔐 Login
+// Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -89,7 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// 📝 Registro
+// Registro
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -110,7 +112,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// 🚀 Iniciar servidor
+// Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);

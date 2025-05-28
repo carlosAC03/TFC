@@ -105,4 +105,29 @@ body {
     background-color: #1a701a; /* un tono más oscuro al pasar el ratón */
 }
 
+.etiqueta-novedad {
+    width: 50px;
+    display: block;
+    margin: 8px 0;
+}
+
+.precio-oferta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.precio-oferta .tachado {
+    text-decoration: line-through;
+    color: red;
+    font-weight: bold;
+}
+
+.precio-oferta .precio-descuento {
+    color: #228B22;
+    font-weight: bold;
+}
+
+
 

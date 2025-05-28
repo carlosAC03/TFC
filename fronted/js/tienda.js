@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
         const categoria = getCategoriaDesdeURL();
 
-        // Si hay búsqueda o categoría, cargar todos los productos sin paginación
         const url = textoBusqueda || categoria
             ? `${API_URL}/productos?page=1&limit=1000`
             : `${API_URL}/productos?page=${paginaActual}&limit=${limite}`;
@@ -45,7 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderProductos(texto);
         });
 
-        // Solo mostrar paginación si no hay filtros
         if (!textoBusqueda && !categoria) {
             renderPaginacion(total);
         }
@@ -64,21 +62,18 @@ function renderPaginacion(total) {
 
     paginador.innerHTML = "";
 
-    // ⏮ Primera
     const btnPrimera = document.createElement("button");
     btnPrimera.textContent = "⏮";
     btnPrimera.disabled = paginaActual === 1;
     btnPrimera.addEventListener("click", () => cambiarPagina(1));
     paginador.appendChild(btnPrimera);
 
-    // ◀ Anterior
     const btnAnterior = document.createElement("button");
     btnAnterior.textContent = "◀";
     btnAnterior.disabled = paginaActual === 1;
     btnAnterior.addEventListener("click", () => cambiarPagina(paginaActual - 1));
     paginador.appendChild(btnAnterior);
 
-    // Números
     for (let i = 1; i <= totalPaginas; i++) {
         const btn = document.createElement("button");
         btn.textContent = i;
@@ -87,14 +82,12 @@ function renderPaginacion(total) {
         paginador.appendChild(btn);
     }
 
-    // ▶ Siguiente
     const btnSiguiente = document.createElement("button");
     btnSiguiente.textContent = "▶";
     btnSiguiente.disabled = paginaActual === totalPaginas;
     btnSiguiente.addEventListener("click", () => cambiarPagina(paginaActual + 1));
     paginador.appendChild(btnSiguiente);
 
-    // ⏭ Última
     const btnUltima = document.createElement("button");
     btnUltima.textContent = "⏭";
     btnUltima.disabled = paginaActual === totalPaginas;
@@ -134,7 +127,13 @@ function renderProductos(filtroTexto = "") {
                 <img src="${p.imagen}" alt="${p.nombre}">
                 <h4>${p.nombre}</h4>
                 <p>${p.descripcion}</p>
-                <span>${p.precio.toFixed(2)} €</span>
+                ${p.novedad ? `<img src="../imagenes/new.png" alt="Novedad" class="etiqueta-novedad">` : ""}
+                ${p.oferta ? `
+                    <p class="precio-oferta">
+                        <span class="tachado">${p.precioOriginal.toFixed(2)} €</span>
+                        <span class="precio-descuento">${p.precio.toFixed(2)} €</span>
+                    </p>
+                ` : `<span>${p.precio.toFixed(2)} €</span>`}
                 <button onclick="añadirCarritoPorNombre('${p.nombre.replace(/'/g, "\\'")}')">Añadir al carrito</button>
             </div>
         `;

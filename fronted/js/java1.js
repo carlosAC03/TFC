@@ -14,7 +14,6 @@ if (images.length) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Menú lateral de filtros
   const filtroBtn = document.getElementById('toggleMenu');
   const filtroMenu = document.querySelector('.filtro-menu');
   const overlay = document.querySelector('.overlay');
@@ -39,39 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Redirección desde buscador a tienda.html con parámetro de búsqueda
+  // Buscador: redirige desde cualquier página a tienda.html
   const searchInput = document.querySelector('.search-input');
-  const currentPage = window.location.pathname;
+  const searchBtn = document.querySelector('.search-icon');
 
   if (searchInput) {
-    const searchBtn = document.querySelector('.search-icon');
-    searchBtn?.addEventListener('click', () => {
+    const redirigirBusqueda = () => {
       const query = searchInput.value.trim();
       if (query) {
-        const isTienda = currentPage.includes('tienda.html');
-        const isOfertas = currentPage.includes('ofertas.html');
-        const isNovedades = currentPage.includes('novedades.html');
-
-        if (!isTienda && !isOfertas && !isNovedades) {
-          window.location.href = `/html/tienda.html?busqueda=${encodeURIComponent(query)}`;
-        }
+        window.location.href = `/html/tienda.html?busqueda=${encodeURIComponent(query)}`;
       }
-    });
+    };
 
     searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        const query = searchInput.value.trim();
-        if (query) {
-          const isTienda = currentPage.includes('tienda.html');
-          const isOfertas = currentPage.includes('ofertas.html');
-          const isNovedades = currentPage.includes('novedades.html');
-
-          if (!isTienda && !isOfertas && !isNovedades) {
-            window.location.href = `/html/tienda.html?busqueda=${encodeURIComponent(query)}`;
-          }
-        }
+        redirigirBusqueda();
       }
     });
+
+    searchBtn?.addEventListener('click', redirigirBusqueda);
   }
 
   // Leer más / Leer menos en blog

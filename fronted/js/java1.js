@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isNovedades = currentPage.includes('novedades.html');
 
         if (!isTienda && !isOfertas && !isNovedades) {
-          window.location.href = `html/tienda.html?busqueda=${encodeURIComponent(query)}`;
+          window.location.href = `/html/tienda.html?busqueda=${encodeURIComponent(query)}`;
         }
       }
     });
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const isNovedades = currentPage.includes('novedades.html');
 
           if (!isTienda && !isOfertas && !isNovedades) {
-            window.location.href = `html/tienda.html?busqueda=${encodeURIComponent(query)}`;
+            window.location.href = `/html/tienda.html?busqueda=${encodeURIComponent(query)}`;
           }
         }
       }

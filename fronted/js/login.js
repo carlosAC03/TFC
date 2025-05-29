@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error(err);
       } finally {
         btnLogin.disabled = false;
-        btnLogin.textContent = "Login";
+        btnLogin.innerHTML = "Login";
       }
     });
   }

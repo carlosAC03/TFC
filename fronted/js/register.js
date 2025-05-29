@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error(err);
       } finally {
         btnRegistro.disabled = false;
-        btnRegistro.textContent = "Registrarse";
+        btnRegistro.innerHTML = "Registrarse";
       }
     });
   }

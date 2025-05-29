@@ -39,22 +39,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Redirección desde buscador si no estás en tienda, ofertas o novedades
+  // Redirección desde buscador a tienda.html con parámetro de búsqueda
   const searchInput = document.querySelector('.search-input');
   const currentPage = window.location.pathname;
 
   if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim();
-        if (!query) return;
-
+    const searchBtn = document.querySelector('.search-icon');
+    searchBtn?.addEventListener('click', () => {
+      const query = searchInput.value.trim();
+      if (query) {
         const isTienda = currentPage.includes('tienda.html');
         const isOfertas = currentPage.includes('ofertas.html');
         const isNovedades = currentPage.includes('novedades.html');
 
         if (!isTienda && !isOfertas && !isNovedades) {
           window.location.href = `html/tienda.html?busqueda=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          const isTienda = currentPage.includes('tienda.html');
+          const isOfertas = currentPage.includes('ofertas.html');
+          const isNovedades = currentPage.includes('novedades.html');
+
+          if (!isTienda && !isOfertas && !isNovedades) {
+            window.location.href = `html/tienda.html?busqueda=${encodeURIComponent(query)}`;
+          }
         }
       }
     });
@@ -70,26 +84,26 @@ document.addEventListener('DOMContentLoaded', () => {
       e.target.textContent = visible ? 'Leer más →' : 'Leer menos ↑';
     });
   });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+  // Menú responsive adicional
   const menuToggle = document.getElementById("menuToggle");
   const menuLateral = document.getElementById("menuLateral");
-  const cerrarMenu = menuLateral.querySelector(".cerrar-menu");
-  const overlay = document.querySelector(".overlay");
+  const cerrarMenu = menuLateral?.querySelector(".cerrar-menu");
 
-  menuToggle.addEventListener("click", () => {
-    menuLateral.classList.add("open");
-    overlay.classList.add("active");
-  });
+  if (menuToggle && menuLateral && overlay) {
+    menuToggle.addEventListener("click", () => {
+      menuLateral.classList.add("open");
+      overlay.classList.add("active");
+    });
 
-  cerrarMenu.addEventListener("click", () => {
-    menuLateral.classList.remove("open");
-    overlay.classList.remove("active");
-  });
+    cerrarMenu?.addEventListener("click", () => {
+      menuLateral.classList.remove("open");
+      overlay.classList.remove("active");
+    });
 
-  overlay.addEventListener("click", () => {
-    menuLateral.classList.remove("open");
-    overlay.classList.remove("active");
-  });
+    overlay.addEventListener("click", () => {
+      menuLateral.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+  }
 });

@@ -19,7 +19,8 @@ function getPaginaDesdeURL() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const loader = document.getElementById("loader");
-    loader.style.display = "block";
+    if (loader) loader.style.display = "block";
+
     try {
         const API_URL = location.hostname === "localhost"
             ? "http://localhost:4000"
@@ -39,10 +40,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderProductos(textoBusqueda);
 
         const buscador = document.querySelector('.search-input');
-        buscador.addEventListener('input', () => {
-            const texto = buscador.value.toLowerCase();
-            renderProductos(texto);
-        });
+        if (buscador) {
+            buscador.value = textoBusqueda;
+            buscador.addEventListener('input', () => {
+                const texto = buscador.value.toLowerCase();
+                renderProductos(texto);
+            });
+        }
 
         if (!textoBusqueda && !categoria) {
             renderPaginacion(total);
@@ -106,13 +110,18 @@ function renderProductos(filtroTexto = "") {
     contenedor.innerHTML = "";
     const categoriaSeleccionada = getCategoriaDesdeURL();
 
-    let productosFiltrados = categoriaSeleccionada
-        ? productos.filter(p => p.categoria === categoriaSeleccionada)
-        : productos;
+    let productosFiltrados = productos;
+
+    if (categoriaSeleccionada) {
+        productosFiltrados = productosFiltrados.filter(p =>
+            p.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
+        );
+    }
 
     if (filtroTexto) {
         productosFiltrados = productosFiltrados.filter(p =>
-            p.nombre.toLowerCase().includes(filtroTexto)
+            p.nombre.toLowerCase().includes(filtroTexto) ||
+            p.descripcion.toLowerCase().includes(filtroTexto)
         );
     }
 

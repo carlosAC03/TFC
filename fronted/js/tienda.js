@@ -112,7 +112,8 @@ function renderProductos(filtroTexto = "") {
     if (paginador) paginador.innerHTML = "";
 
     const categoriaSeleccionada = getCategoriaDesdeURL();
-    const esBusqueda = !!getBusquedaDesdeURL();
+    const textoBusqueda = getBusquedaDesdeURL();
+    const esFiltrado = !!textoBusqueda || !!categoriaSeleccionada;
 
     let productosFiltrados = productos;
 
@@ -122,17 +123,17 @@ function renderProductos(filtroTexto = "") {
         );
     }
 
-    if (filtroTexto) {
+    if (filtroTexto || textoBusqueda) {
+        const texto = (filtroTexto || textoBusqueda).toLowerCase();
         productosFiltrados = productosFiltrados.filter(p =>
-            p.nombre.toLowerCase().includes(filtroTexto) ||
-            p.descripcion.toLowerCase().includes(filtroTexto)
+            p.nombre.toLowerCase().includes(texto) ||
+            p.descripcion.toLowerCase().includes(texto)
         );
     }
 
     const totalFiltrados = productosFiltrados.length;
 
-    // Solo paginar si hay más de 12 resultados
-    if (!esBusqueda && !categoriaSeleccionada || totalFiltrados > limite) {
+    if (totalFiltrados > limite) {
         const inicio = (paginaActual - 1) * limite;
         const fin = inicio + limite;
         productosFiltrados = productosFiltrados.slice(inicio, fin);

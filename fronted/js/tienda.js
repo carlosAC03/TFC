@@ -107,8 +107,12 @@ function cambiarPagina(nuevaPagina) {
 
 function renderProductos(filtroTexto = "") {
     const contenedor = document.getElementById("productos");
+    const paginador = document.getElementById("paginacion");
     contenedor.innerHTML = "";
+    if (paginador) paginador.innerHTML = "";
+
     const categoriaSeleccionada = getCategoriaDesdeURL();
+    const esBusqueda = !!getBusquedaDesdeURL();
 
     let productosFiltrados = productos;
 
@@ -123,6 +127,16 @@ function renderProductos(filtroTexto = "") {
             p.nombre.toLowerCase().includes(filtroTexto) ||
             p.descripcion.toLowerCase().includes(filtroTexto)
         );
+    }
+
+    const totalFiltrados = productosFiltrados.length;
+
+    // Solo paginar si hay más de 12 resultados
+    if (!esBusqueda && !categoriaSeleccionada || totalFiltrados > limite) {
+        const inicio = (paginaActual - 1) * limite;
+        const fin = inicio + limite;
+        productosFiltrados = productosFiltrados.slice(inicio, fin);
+        renderPaginacion(totalFiltrados);
     }
 
     if (productosFiltrados.length === 0) {

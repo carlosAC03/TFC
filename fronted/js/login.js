@@ -18,9 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const form = document.getElementById("login-form");
-  if (form) {
+  const btnLogin = document.getElementById("btn-login");
+
+  if (form && btnLogin) {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
+
+      btnLogin.disabled = true;
+      btnLogin.innerHTML = `Entrando <span class="spinner"></span>`;
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
@@ -41,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (err) {
         alert("No se pudo conectar con el servidor");
         console.error(err);
+      } finally {
+        btnLogin.disabled = false;
+        btnLogin.textContent = "Login";
       }
     });
   }

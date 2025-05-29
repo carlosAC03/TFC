@@ -7,9 +7,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const clave = `carrito_${usuario.email}`;
+    limpiarCarritoExpirado(clave);
     const carrito = JSON.parse(localStorage.getItem(clave)) || {};
     renderCarrito(carrito);
 });
+
+function limpiarCarritoExpirado(clave) {
+    const carrito = JSON.parse(localStorage.getItem(clave)) || {};
+    const ahora = Date.now();
+    const actualizado = {};
+
+    for (const nombre in carrito) {
+        if (!carrito[nombre].timestamp || ahora - carrito[nombre].timestamp < 120000) {
+            actualizado[nombre] = carrito[nombre];
+        }
+    }
+
+    localStorage.setItem(clave, JSON.stringify(actualizado));
+}
 
 function renderCarrito(carrito) {
     const contenedor = document.getElementById("carrito-container");
@@ -30,6 +45,16 @@ function renderCarrito(carrito) {
         `;
         contenedor.appendChild(item);
     }
+
+    const boton = document.createElement("button");
+    boton.textContent = "Comprar";
+    boton.style.backgroundColor = "#28a745";
+    boton.style.color = "white";
+    boton.style.fontSize = "18px";
+    boton.style.padding = "10px 20px";
+    boton.style.marginTop = "20px";
+    boton.onclick = realizarCompra;
+    contenedor.appendChild(boton);
 }
 
 function cambiarCantidad(nombre, cambio) {
@@ -47,4 +72,24 @@ function cambiarCantidad(nombre, cambio) {
 
     localStorage.setItem(clave, JSON.stringify(carrito));
     renderCarrito(carrito);
+}
+
+async function realizarCompra() {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const clave = `carrito_${usuario.email}`;
+    const carrito = JSON.parse(localStorage.getItem(clave)) || {};
+
+    const res = await fetch("http://localhost:4000/comprar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: usuario.email, carrito })
+    });
+
+    if (res.ok) {
+        alert("Compra realizada con éxito.");
+        localStorage.removeItem(clave);
+        renderCarrito({});
+    } else {
+        alert("Error al realizar la compra.");
+    }
 }

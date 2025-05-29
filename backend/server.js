@@ -117,3 +117,24 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor levantado en el puerto ${PORT}`);
 });
+
+// Ruta para guardar compras del usuario
+app.post("/comprar", async (req, res) => {
+  const { email, carrito } = req.body;
+  try {
+    await client.connect();
+    const db = client.db(dbName);
+    const compras = db.collection("compras");
+
+    await compras.insertOne({
+      email,
+      carrito,
+      fecha: new Date()
+    });
+
+    res.status(200).json({ message: "Compra guardada" });
+  } catch (err) {
+    console.error("Error al guardar compra:", err);
+    res.status(500).json({ message: "Error al guardar compra" });
+  }
+});

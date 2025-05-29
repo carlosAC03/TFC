@@ -200,7 +200,8 @@ function añadirCarritoPorNombre(nombre) {
   } else {
     carrito[nombre] = {
       precio: prod.precio,
-      cantidad: 1
+      cantidad: 1,
+      timestamp: Date.now()
     };
   }
 

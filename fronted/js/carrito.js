@@ -79,7 +79,9 @@ async function realizarCompra() {
     const clave = `carrito_${usuario.email}`;
     const carrito = JSON.parse(localStorage.getItem(clave)) || {};
 
-    const res = await fetch("http://localhost:4000/comprar", {
+    const API_URL = "https://tfc-2gv2.onrender.com"; // URL real de tu backend
+
+    const res = await fetch(`${API_URL}/comprar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: usuario.email, carrito })
@@ -93,3 +95,4 @@ async function realizarCompra() {
         alert("Error al realizar la compra.");
     }
 }
+

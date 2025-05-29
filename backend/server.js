@@ -6,16 +6,15 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// ✅ Permitir peticiones desde tu frontend de Render
 app.use(cors({
-  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"]
+  origin: ["https://tfc-2gv2.onrender.com", "http://localhost:5500"]
 }));
 
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta base de prueba
+// Ruta base
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
@@ -112,29 +111,35 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Iniciar servidor
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Servidor levantado en el puerto ${PORT}`);
-});
-
-// Ruta para guardar compras del usuario
+// ✅ NUEVO: Guardar compra en campo `compras` del usuario
 app.post("/comprar", async (req, res) => {
   const { email, carrito } = req.body;
   try {
     await client.connect();
     const db = client.db(dbName);
-    const compras = db.collection("compras");
+    const usuarios = db.collection("usuarios");
 
-    await compras.insertOne({
-      email,
-      carrito,
+    const productosComprados = Object.entries(carrito).map(([nombre, info]) => ({
+      nombre,
+      cantidad: info.cantidad,
+      precio: info.precio,
       fecha: new Date()
-    });
+    }));
 
-    res.status(200).json({ message: "Compra guardada" });
+    await usuarios.updateOne(
+      { email },
+      { $push: { compras: { $each: productosComprados } } }
+    );
+
+    res.status(200).json({ message: "Compra guardada en el usuario" });
   } catch (err) {
     console.error("Error al guardar compra:", err);
     res.status(500).json({ message: "Error al guardar compra" });
   }
+});
+
+// Iniciar servidor
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Servidor levantado en el puerto ${PORT}`);
 });

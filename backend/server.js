@@ -7,9 +7,10 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ["https://tfc-2gv2.onrender.com", "http://localhost:5500"]
+  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"], // ⚠️ Aquí debe ir tu frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"]
 }));
-
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";

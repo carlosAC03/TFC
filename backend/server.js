@@ -1,3 +1,5 @@
+require("dotenv").config(); // ✅ Carga variables desde .env
+
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
@@ -6,12 +8,27 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
+// ✅ CORS dinámico: acepta local, producción y herramientas externas
+const allowedOrigins = [
+  "https://tfc-1.onrender.com",
+  "https://tfc-2gv2.onrender.com",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500"
+];
+
 app.use(cors({
-  origin: ["https://tfc-1.onrender.com", "http://localhost:5500", "https://tfc-2gv2.onrender.com"], // incluye ambos dominios
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS no permitido desde: " + origin));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));
 
+// ✅ Conexión MongoDB Atlas desde .env (usa Atlas en local y producción)
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
@@ -113,7 +130,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// ✅ Guardar compra SOLO en la colección "compras"
+// Guardar compra
 app.post("/comprar", async (req, res) => {
   const { email, carrito } = req.body;
   try {
@@ -143,5 +160,5 @@ app.post("/comprar", async (req, res) => {
 // Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Servidor levantado en el puerto ${PORT}`);
+  console.log(`🚀 Servidor levantado en el puerto ${PORT}`);
 });

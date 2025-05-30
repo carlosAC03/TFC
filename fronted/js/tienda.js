@@ -22,9 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (loader) loader.style.display = "block";
 
   try {
-    const API_URL = location.hostname === "localhost"
-      ? "http://localhost:4000"
-      : "https://tfc-2gv2.onrender.com";
+    const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
+    ? "http://localhost:4000"
+    : "https://tfc-2gv2.onrender.com";
+
 
     const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
     const categoria = getCategoriaDesdeURL();

@@ -23,9 +23,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
-    ? "http://localhost:4000"
-    : "https://tfc-2gv2.onrender.com";
-
+      ? "http://localhost:4000"
+      : "https://tfc-2gv2.onrender.com";
 
     const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
     const categoria = getCategoriaDesdeURL();
@@ -126,7 +125,6 @@ function renderProductos(filtroTexto = "") {
 
   const categoriaSeleccionada = getCategoriaDesdeURL();
   const textoBusqueda = getBusquedaDesdeURL();
-  const esFiltrado = !!textoBusqueda || !!categoriaSeleccionada;
 
   let productosFiltrados = productos;
 
@@ -151,8 +149,8 @@ function renderProductos(filtroTexto = "") {
     const fin = inicio + limite;
     productosFiltrados = productosFiltrados.slice(inicio, fin);
     renderPaginacion(totalFiltrados);
-  } else if (!filtroTexto && !getBusquedaDesdeURL() && productos.length > limite) {
-    renderPaginacion(productos.length);
+  } else {
+    if (paginador) paginador.innerHTML = "";
   }
 
   if (productosFiltrados.length === 0) {

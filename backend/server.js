@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"],
+  origin: ["https://tfc-1.onrender.com", "http://localhost:5500", "https://tfc-2gv2.onrender.com"], // incluye ambos dominios
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));

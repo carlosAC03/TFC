@@ -1,4 +1,7 @@
-require("dotenv").config(); // ✅ Carga variables desde .env
+// Carga .env solo en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const express = require("express");
 const cors = require("cors");
@@ -8,7 +11,7 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// ✅ CORS dinámico: acepta local, producción y herramientas externas
+// CORS para local y producción
 const allowedOrigins = [
   "https://tfc-1.onrender.com",
   "https://tfc-2gv2.onrender.com",
@@ -28,7 +31,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-// ✅ Conexión MongoDB Atlas desde .env (usa Atlas en local y producción)
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";

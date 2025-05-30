@@ -7,10 +7,11 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"], // ⚠️ Aquí debe ir tu frontend
+  origin: ["https://tfc-1.onrender.com", "http://localhost:5500"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"]
 }));
+
 const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "supermercado";
@@ -112,27 +113,27 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// ✅ NUEVO: Guardar compra en campo `compras` del usuario
+// ✅ Guardar compra SOLO en la colección "compras"
 app.post("/comprar", async (req, res) => {
   const { email, carrito } = req.body;
   try {
     await client.connect();
     const db = client.db(dbName);
-    const usuarios = db.collection("usuarios");
+    const compras = db.collection("compras");
 
     const productosComprados = Object.entries(carrito).map(([nombre, info]) => ({
       nombre,
       cantidad: info.cantidad,
-      precio: info.precio,
-      fecha: new Date()
+      precio: info.precio
     }));
 
-    await usuarios.updateOne(
-      { email },
-      { $push: { compras: { $each: productosComprados } } }
-    );
+    await compras.insertOne({
+      email,
+      productos: productosComprados,
+      fecha: new Date()
+    });
 
-    res.status(200).json({ message: "Compra guardada en el usuario" });
+    res.status(200).json({ message: "Compra registrada correctamente" });
   } catch (err) {
     console.error("Error al guardar compra:", err);
     res.status(500).json({ message: "Error al guardar compra" });

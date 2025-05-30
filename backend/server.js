@@ -1,4 +1,4 @@
-// Carga .env solo en desarrollo
+// ✅ Cargar variables de entorno solo en desarrollo
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -11,12 +11,13 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
+// ✅ Lista de orígenes permitidos para CORS
 const allowedOrigins = [
   "https://tfc-1.onrender.com",
   "https://tfc-2gv2.onrender.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
-  "http://127.0.0.1:3001" // ✅ Para Live Server u otros puertos
+  "http://127.0.0.1:3001"
 ];
 
 app.use(cors({
@@ -31,16 +32,21 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
+// ✅ URI de conexión a MongoDB Atlas (desde .env)
+const uri = process.env.MONGO_URL;
+if (!uri) {
+  console.error("❌ ERROR: No se ha definido MONGO_URL en el entorno.");
+  process.exit(1); // Detiene el servidor si no hay URI
+}
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta base
+// ✅ Ruta base
 app.get("/", (req, res) => {
   res.send("✅ Backend de Supermercados Acosta está activo.");
 });
 
-// Productos con paginación
+// ✅ Obtener productos con paginación
 app.get("/productos", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 12;
@@ -64,7 +70,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// Productos en oferta
+// ✅ Productos en oferta
 app.get("/productos/ofertas", async (req, res) => {
   try {
     await client.connect();
@@ -77,7 +83,7 @@ app.get("/productos/ofertas", async (req, res) => {
   }
 });
 
-// Novedades
+// ✅ Productos nuevos
 app.get("/productos/novedades", async (req, res) => {
   try {
     await client.connect();
@@ -90,7 +96,7 @@ app.get("/productos/novedades", async (req, res) => {
   }
 });
 
-// Login
+// ✅ Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -111,7 +117,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Registro
+// ✅ Registro
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -132,7 +138,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Guardar compra
+// ✅ Guardar compra
 app.post("/comprar", async (req, res) => {
   const { email, carrito } = req.body;
   try {
@@ -159,7 +165,7 @@ app.post("/comprar", async (req, res) => {
   }
 });
 
-// Iniciar servidor
+// ✅ Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor levantado en el puerto ${PORT}`);

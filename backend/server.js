@@ -11,12 +11,12 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// CORS para local y producción
 const allowedOrigins = [
   "https://tfc-1.onrender.com",
   "https://tfc-2gv2.onrender.com",
   "http://localhost:5500",
-  "http://127.0.0.1:5500"
+  "http://127.0.0.1:5500",
+  "http://127.0.0.1:3001" // ✅ Para Live Server u otros puertos
 ];
 
 app.use(cors({

@@ -167,6 +167,11 @@ app.post("/comprar", async (req, res) => {
   }
 });
 
+// ✅ Captura cualquier ruta no manejada y redirige a index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "fronted", "index.html"));
+});
+
 // ✅ Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

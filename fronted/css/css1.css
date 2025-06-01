@@ -405,6 +405,14 @@ header {
 .menu-toggle {
   display: none;
 }
+
+.filtro-menu {
+  display: none;
+}
+
+.filtro-menu.activo {
+  display: block;
+}
 /* Ocultar el menú original en móvil */
 @media (max-width: 768px) {
   .nav-container {

@@ -240,14 +240,15 @@ function añadirCarritoPorNombre(nombre) {
   alert(`${nombre} añadido al carrito`);
 }
 
-// Cerrar panel lateral de filtros desde botón
+// Cerrar menú lateral de filtros (filtro-menu) con botón
 document.addEventListener("DOMContentLoaded", () => {
-  const cerrarBtn = document.querySelector(".btn-cerrar-filtros");
-  const menuLateral = document.querySelector(".menu-lateral");
+  const btnCerrarFiltro = document.querySelector('.filtro-menu .cerrar-menu');
+  const filtroMenu = document.querySelector('.filtro-menu');
 
-  if (cerrarBtn && menuLateral) {
-    cerrarBtn.addEventListener("click", () => {
-      menuLateral.classList.remove("activo"); // Ajusta si usas otra clase
+  if (btnCerrarFiltro && filtroMenu) {
+    btnCerrarFiltro.addEventListener("click", () => {
+      filtroMenu.classList.remove("activo"); // o usa .style.display = "none";
     });
   }
 });
+

@@ -1,4 +1,3 @@
-// Cargar variables de entorno solo en desarrollo
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -12,13 +11,14 @@ const { MongoClient } = require("mongodb");
 const app = express();
 app.use(express.json());
 
-// Servir archivos HTML desde la carpeta 'fronted/html'
-app.use(express.static(path.join(__dirname, "fronted", "html")));
+// ✅ Servir archivos estáticos desde /fronted (está una carpeta arriba del backend)
+app.use(express.static(path.join(__dirname, "..", "fronted")));
+
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "fronted", "html", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "fronted", "index.html"));
 });
 
-// Lista de orígenes permitidos para CORS
+// ✅ Lista de orígenes permitidos para CORS
 const allowedOrigins = [
   "https://tfc-1.onrender.com",
   "https://tfc-2gv2.onrender.com",
@@ -39,16 +39,16 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-// URI de conexión a MongoDB Atlas
+// ✅ Conexión a MongoDB Atlas
 const uri = process.env.MONGO_URL;
 if (!uri) {
-  console.error(" ERROR: No se ha definido MONGO_URL en el entorno.");
+  console.error("❌ ERROR: No se ha definido MONGO_URL en el entorno.");
   process.exit(1);
 }
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Obtener productos
+// ✅ Ruta para obtener productos
 app.get("/productos", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 12;
@@ -72,7 +72,7 @@ app.get("/productos", async (req, res) => {
   }
 });
 
-// Productos en oferta
+// ✅ Ruta para productos en oferta
 app.get("/productos/ofertas", async (req, res) => {
   try {
     await client.connect();
@@ -85,7 +85,7 @@ app.get("/productos/ofertas", async (req, res) => {
   }
 });
 
-// Productos nuevos
+// ✅ Ruta para productos nuevos
 app.get("/productos/novedades", async (req, res) => {
   try {
     await client.connect();
@@ -98,7 +98,7 @@ app.get("/productos/novedades", async (req, res) => {
   }
 });
 
-// Login
+// ✅ Ruta de login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -119,7 +119,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Registro
+// ✅ Ruta de registro
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -140,7 +140,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Guardar compra
+// ✅ Ruta para guardar compras
 app.post("/comprar", async (req, res) => {
   const { email, carrito } = req.body;
   try {
@@ -167,7 +167,7 @@ app.post("/comprar", async (req, res) => {
   }
 });
 
-// Iniciar servidor
+// ✅ Iniciar servidor
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor levantado en el puerto ${PORT}`);

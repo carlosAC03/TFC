@@ -10,3 +10,17 @@ export function ocultarLoader() {
     const loader = document.getElementById("loader");
     if (loader) loader.remove();
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("a[href]");
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (
+      href &&
+      !href.startsWith("http") &&
+      !href.startsWith("/") &&
+      !href.startsWith("#")
+    ) {
+      link.setAttribute("href", "/" + href);
+    }
+  });
+});

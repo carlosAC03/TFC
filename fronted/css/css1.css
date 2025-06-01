@@ -406,6 +406,10 @@ header {
   display: none;
 }
 
+.filtro-menu .cerrar-menu {
+  display: none !important;
+}
+
 /* Ocultar el menú original en móvil */
 @media (max-width: 768px) {
   .nav-container {

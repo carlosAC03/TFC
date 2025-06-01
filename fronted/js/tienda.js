@@ -240,15 +240,29 @@ function añadirCarritoPorNombre(nombre) {
   alert(`${nombre} añadido al carrito`);
 }
 
-// Cerrar menú lateral de filtros (filtro-menu) con botón
 document.addEventListener("DOMContentLoaded", () => {
-  const btnCerrarFiltro = document.querySelector('.filtro-menu .cerrar-menu');
-  const filtroMenu = document.querySelector('.filtro-menu');
+  const btnAbrir = document.querySelector("#menuToggle");
+  const btnCerrar = document.querySelector(".filtro-menu .cerrar-menu");
+  const menu = document.querySelector(".filtro-menu");
+  const overlay = document.querySelector(".overlay");
 
-  if (btnCerrarFiltro && filtroMenu) {
-    btnCerrarFiltro.addEventListener("click", () => {
-      filtroMenu.classList.remove("activo"); // o usa .style.display = "none";
+  if (btnAbrir && menu && overlay) {
+    btnAbrir.addEventListener("click", () => {
+      menu.classList.add("activo");
+      overlay.classList.add("activo");
     });
   }
-});
 
+  if (btnCerrar && menu && overlay) {
+    btnCerrar.addEventListener("click", () => {
+      menu.classList.remove("activo");
+      overlay.classList.remove("activo");
+    });
+  }
+
+  // Cierra el menú si se hace clic sobre la capa oscura (overlay)
+  overlay?.addEventListener("click", () => {
+    menu.classList.remove("activo");
+    overlay.classList.remove("activo");
+  });
+});

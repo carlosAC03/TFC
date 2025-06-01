@@ -6,10 +6,17 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 const { MongoClient } = require("mongodb");
 
 const app = express();
 app.use(express.json());
+
+// Servir archivos HTML desde la carpeta 'fronted/html'
+app.use(express.static(path.join(__dirname, "fronted", "html")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "fronted", "html", "index.html"));
+});
 
 // Lista de orígenes permitidos para CORS
 const allowedOrigins = [
@@ -32,21 +39,16 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-// URI de conexión a MongoDB Atlas (desde .env)
+// URI de conexión a MongoDB Atlas
 const uri = process.env.MONGO_URL;
 if (!uri) {
-  console.error("ERROR: No se ha definido MONGO_URL en el entorno.");
-  process.exit(1); // Detiene el servidor si no hay URI
+  console.error(" ERROR: No se ha definido MONGO_URL en el entorno.");
+  process.exit(1);
 }
 const client = new MongoClient(uri);
 const dbName = "supermercado";
 
-// Ruta base
-app.get("/", (req, res) => {
-  res.send("Backend de Supermercados Acosta está activo.");
-});
-
-// Obtener productos con paginación
+// Obtener productos
 app.get("/productos", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 12;

@@ -402,6 +402,10 @@ header {
     75% { content: "..."; }
     100% { content: ""; }
 }
+.menu-toggle {
+  display: none;
+}
+
 /* Ocultar el menú original en móvil */
 @media (max-width: 768px) {
   .nav-container {

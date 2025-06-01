@@ -24,7 +24,8 @@ const allowedOrigins = [
   "https://tfc-2gv2.onrender.com",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
-  "http://127.0.0.1:3001"
+  "http://127.0.0.1:3001",
+  "http://localhost:4000"
 ];
 
 app.use(cors({

@@ -402,33 +402,6 @@ header {
     75% { content: "..."; }
     100% { content: ""; }
 }
-.menu-toggle {
-  display: none;
-}
-
-.filtro-menu {
-  display: none;
-  /* o transform: translateX(-100%); */
-}
-
-.filtro-menu.activo {
-  display: block;
-  /* o transform: translateX(0); */
-}
-
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 9;
-}
-
-.overlay.activo {
-  display: block;
-}
 /* Ocultar el menú original en móvil */
 @media (max-width: 768px) {
   .nav-container {

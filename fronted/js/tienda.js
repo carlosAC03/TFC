@@ -239,30 +239,3 @@ function añadirCarritoPorNombre(nombre) {
   localStorage.setItem(clave, JSON.stringify(carrito));
   alert(`${nombre} añadido al carrito`);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btnAbrir = document.querySelector("#menuToggle");
-  const btnCerrar = document.querySelector(".filtro-menu .cerrar-menu");
-  const menu = document.querySelector(".filtro-menu");
-  const overlay = document.querySelector(".overlay");
-
-  if (btnAbrir && menu && overlay) {
-    btnAbrir.addEventListener("click", () => {
-      menu.classList.add("activo");
-      overlay.classList.add("activo");
-    });
-  }
-
-  if (btnCerrar && menu && overlay) {
-    btnCerrar.addEventListener("click", () => {
-      menu.classList.remove("activo");
-      overlay.classList.remove("activo");
-    });
-  }
-
-  // Cierra el menú si se hace clic sobre la capa oscura (overlay)
-  overlay?.addEventListener("click", () => {
-    menu.classList.remove("activo");
-    overlay.classList.remove("activo");
-  });
-});

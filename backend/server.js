@@ -168,7 +168,7 @@ app.post("/comprar", async (req, res) => {
 });
 
 // ✅ Captura cualquier ruta no manejada y redirige a index.html
-app.get("*", (req, res) => {
+app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "fronted", "index.html"));
 });
 

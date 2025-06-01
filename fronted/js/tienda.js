@@ -239,3 +239,15 @@ function añadirCarritoPorNombre(nombre) {
   localStorage.setItem(clave, JSON.stringify(carrito));
   alert(`${nombre} añadido al carrito`);
 }
+
+// Cerrar panel lateral de filtros desde botón
+document.addEventListener("DOMContentLoaded", () => {
+  const cerrarBtn = document.querySelector(".btn-cerrar-filtros");
+  const menuLateral = document.querySelector(".menu-lateral");
+
+  if (cerrarBtn && menuLateral) {
+    cerrarBtn.addEventListener("click", () => {
+      menuLateral.classList.remove("activo"); // Ajusta si usas otra clase
+    });
+  }
+});

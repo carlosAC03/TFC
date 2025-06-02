@@ -5,29 +5,22 @@
   <title>Carrito</title>
   <link rel="stylesheet" href="../css/carrito.css">
   <link rel="stylesheet" href="../css/css1.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-   <header>
+  <header>
     <div class="nav-container">
-      <a href="../index.html">
-        <img src="../imagenes/Logo.png" alt="Logo" class="logo">
-      </a>
+      <a href="../index.html"><img src="../imagenes/Logo.png" alt="Logo" class="logo"></a>
       <div class="search-wrapper">
         <button class="search-icon">
-          <div class="lupa">
-            <img src="../imagenes/lupa.png" alt="Buscar">
-          </div>
+          <div class="lupa"><img src="../imagenes/lupa.png" alt="Buscar"></div>
         </button>
         <input type="text" class="search-input" placeholder="Buscar productos...">
       </div>
       <div class="iconos-header">
         <button class="menu-icon" id="toggleMenu">&#9776;</button>
-        <a href="login.html" class="icono-header">
-          <img src="../imagenes/login.png" alt="Usuario">
-        </a>
-        <a href="carrito.html" class="icono-header">
-          <img src="../imagenes/carrito.png" alt="Carrito">
-        </a>
+        <a href="login.html" class="icono-header"><img src="../imagenes/login.png" alt="Usuario"></a>
+        <a href="carrito.html" class="icono-header"><img src="../imagenes/carrito.png" alt="Carrito"></a>
       </div>
     </div>
 
@@ -42,42 +35,42 @@
       </ul>
     </nav>
   </header>
- <!-- NUEVO MENÚ LATERAL RESPONSIVE -->
-    <button id="menuToggle" class="menu-toggle">Menú</button>
 
-    <div class="menu-lateral" id="menuLateral">
-      <button class="cerrar-menu">&times;</button>
-      <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="tienda.html">Tienda</a></li>
-        <li><a href="novedades.html">Novedades</a></li>
-        <li><a href="ofertas.html">Ofertas</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </div>
+  <button id="menuToggle" class="menu-toggle">Menú</button>
+  <div class="menu-lateral" id="menuLateral">
+    <button class="cerrar-menu">&times;</button>
+    <ul>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="novedades.html">Novedades</a></li>
+      <li><a href="ofertas.html">Ofertas</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </div>
 
-    <div class="overlay"></div>
-   <div id="carrito-wrapper">
-    <button id="cerrar-carrito" class="cerrar-carrito">&times;</button>
+  <div class="overlay"></div>
+
+  <div id="carrito-wrapper">
     <h2 class="titulo">Carrito de la compra</h2>
     <div id="carrito-container"></div>
   </div>
+
   <div class="filtro-menu">
     <button class="cerrar-menu">&times;</button>
     <h3>Filtrar por categoría</h3>
     <ul>
-        <li><a href="tienda.html?categoria=Aperitivos">Aperitivos</a></li>
-        <li><a href="tienda.html?categoria=Carnes Vegetales">Carnes, Vegetales y Frutas</a></li>
-        <li><a href="tienda.html?categoria=Arroz, Legumbres y Cereal">Arroz, Legumbres y Cereal</a></li>
-        <li><a href="tienda.html?categoria=Chocolates">Chocolates</a></li>
-        <li><a href="tienda.html?categoria=Condimentos y Semillas">Condimentos y Semillas</a></li>
-        <li><a href="tienda.html?categoria=Galletas y Bollería">Galletas y Bollería</a></li>
-        <li><a href="tienda.html?categoria=Harinas y Levadura">Harinas y Levadura</a></li>
+      <li><a href="tienda.html?categoria=Aperitivos">Aperitivos</a></li>
+      <li><a href="tienda.html?categoria=Carnes Vegetales">Carnes, Vegetales y Frutas</a></li>
+      <li><a href="tienda.html?categoria=Arroz, Legumbres y Cereal">Arroz, Legumbres y Cereal</a></li>
+      <li><a href="tienda.html?categoria=Chocolates">Chocolates</a></li>
+      <li><a href="tienda.html?categoria=Condimentos y Semillas">Condimentos y Semillas</a></li>
+      <li><a href="tienda.html?categoria=Galletas y Bollería">Galletas y Bollería</a></li>
+      <li><a href="tienda.html?categoria=Harinas y Levadura">Harinas y Levadura</a></li>
     </ul>
-</div>
+  </div>
 
-<div class="overlay"></div>
+  <div class="overlay"></div>
 
   <script src="../js/carrito.js"></script>
   <script src="../js/java1.js"></script>

@@ -10,14 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   limpiarCarritoExpirado(clave);
   const carrito = JSON.parse(localStorage.getItem(clave)) || {};
   renderCarrito(carrito);
-
-  // Botón para cerrar el carrito
-  const btnCerrar = document.getElementById("cerrar-carrito");
-  if (btnCerrar) {
-    btnCerrar.addEventListener("click", () => {
-      window.location.href = "../index.html";
-    });
-  }
 });
 
 function limpiarCarritoExpirado(clave) {

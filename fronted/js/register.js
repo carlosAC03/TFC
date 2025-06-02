@@ -25,9 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const data = await res.json();
         if (res.ok) {
-          Swal.fire("Registro exitoso", "Usuario registrado correctamente. Ahora puedes iniciar sesión.", "success")
-          .then(() => window.location.href = "login.html");
-          window.location.href = "login.html";
+          Swal.fire({
+          icon: "success",
+          title: "Registro exitoso",
+          text: "Usuario registrado correctamente. Ahora puedes iniciar sesión.",
+          confirmButtonText: "Ir al login"
+          }).then(result => {
+        if (result.isConfirmed) {
+    window.location.href = "login.html";
+  }
+});
         } else {
           Swal.fire("Error", data.message || "Error al registrar", "error");
         }

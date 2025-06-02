@@ -58,8 +58,16 @@ function renderProductosConBoton(lista) {
 function añadirCarritoPorNombre(nombre) {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario?.email) {
-        Swal.fire("Acceso requerido", "Debes iniciar sesión para añadir productos al carrito.", "warning")
-        .then(() => window.location.href = "login.html");
+        Swal.fire({
+        icon: "warning",
+        title: "Acceso requerido",
+        text: "Debes iniciar sesión para añadir productos al carrito.",
+        confirmButtonText: "Iniciar sesión"
+        }).then(result => {
+  if (result.isConfirmed) {
+    window.location.href = "login.html";
+  }
+});
         return;
     }
 

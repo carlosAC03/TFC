@@ -212,14 +212,15 @@ function renderProductos(filtroTexto = "") {
 function añadirCarritoPorNombre(nombre) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   if (!usuario?.email) {
-    alert("Debes iniciar sesión para añadir productos al carrito.");
+    Swal.fire("Acceso requerido", "Debes iniciar sesión para añadir productos al carrito.", "warning")
+    .then(() => window.location.href = "login.html");
     window.location.href = "login.html";
     return;
   }
 
   const prod = productos.find(p => p.nombre === nombre);
   if (!prod) {
-    alert("Producto no encontrado.");
+    Swal.fire("Error", "Producto no encontrado.", "error");
     return;
   }
 
@@ -237,5 +238,5 @@ function añadirCarritoPorNombre(nombre) {
   }
 
   localStorage.setItem(clave, JSON.stringify(carrito));
-  alert(`${nombre} añadido al carrito`);
+  Swal.fire("Añadido al carrito", `${nombre} añadido al carrito`, "success");
 }

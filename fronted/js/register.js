@@ -25,13 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const data = await res.json();
         if (res.ok) {
-          alert("Usuario registrado correctamente. Ahora puedes iniciar sesión.");
+          Swal.fire("Registro exitoso", "Usuario registrado correctamente. Ahora puedes iniciar sesión.", "success")
+          .then(() => window.location.href = "login.html");
           window.location.href = "login.html";
         } else {
-          alert(data.message || "Error al registrar");
+          Swal.fire("Error", data.message || "Error al registrar", "error");
         }
       } catch (err) {
-        alert("No se pudo conectar con el servidor");
+        Swal.fire("Error", "No se pudo conectar con el servidor", "error");
         console.error(err);
       } finally {
         btnRegistro.disabled = false;

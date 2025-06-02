@@ -42,10 +42,10 @@ const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
           localStorage.setItem("usuario", JSON.stringify({ email }));
           location.reload();
         } else {
-          alert(data.message || "Error al iniciar sesión");
+          Swal.fire("Error", data.message || "Error al iniciar sesión", "error");
         }
       } catch (err) {
-        alert("No se pudo conectar con el servidor");
+        Swal.fire("Error", "No se pudo conectar con el servidor", "error");
         console.error(err);
       } finally {
         btnLogin.disabled = false;

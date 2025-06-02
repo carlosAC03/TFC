@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   if (!usuario?.email) {
-    alert("Debes iniciar sesión para ver tu carrito.");
-    window.location.href = "login.html";
+    Swal.fire("Acceso requerido", "Debes iniciar sesión para ver tu carrito.", "warning")
+    .then(() => window.location.href = "login.html");
     return;
   }
 
@@ -88,10 +88,10 @@ async function realizarCompra() {
   });
 
   if (res.ok) {
-    alert("Compra realizada con éxito.");
+    Swal.fire("¡Gracias por tu compra!", "Compra realizada con éxito.", "success");
     localStorage.removeItem(clave);
     renderCarrito({});
   } else {
-    alert("Error al realizar la compra.");
+    Swal.fire("Error", "Error al realizar la compra.", "error");
   }
 }

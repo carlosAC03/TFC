@@ -1,5 +1,4 @@
 function logout() {
     localStorage.removeItem("usuario");
-    alert("Sesión cerrada");
-    location.reload();
+    Swal.fire("Sesión cerrada", "Vuelve pronto", "info").then(() => location.reload());
 }

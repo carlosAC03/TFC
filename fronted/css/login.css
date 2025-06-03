@@ -18,12 +18,14 @@
 .login-box h2 {
     color: #222;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .login-box h3 {
     color: #666;
     margin-bottom: 30px;
     font-weight: normal;
+    text-align: center;
 }
 
 .login-box label {
@@ -46,7 +48,7 @@
 
     display: block;         /* importante para ocupar línea completa */
     margin-top: 20px;       /* espacio respecto al input anterior */
-    text-align: left;       /* alinear texto a la izquierda */
+    text-align: center;
 }
 
 .login-btn:hover {
@@ -79,6 +81,23 @@
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-box input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 5px 0 15px;
+  box-sizing: border-box;
 }
 
 @keyframes spin {

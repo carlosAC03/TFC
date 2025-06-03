@@ -17,16 +17,22 @@ body {
     padding: 20px;
 }
 
+.producto-wrapper {
+    position: relative;
+    padding-top: 20px;
+}
+
 .producto {
     background: white;
     border: 1px solid #ccc;
     border-radius: 12px;
     padding: 20px;
     text-align: center;
-    height: 400px; /* altura fija */
+    min-height: 460px; /* adaptable y con espacio extra */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .producto img {
@@ -162,6 +168,24 @@ body {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); /* para que se separe visualmente del fondo */
 }
 
+.boton-editar-admin {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background-color: crimson;
+    color: white;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
 
+.boton-editar-admin:hover {
+    background-color: darkred;
+}
 
 

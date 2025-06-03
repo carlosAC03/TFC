@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!textoBusqueda && !categoria) {
       renderPaginacion(total);
     }
-
   } catch (err) {
     console.error("Error al cargar productos:", err);
   } finally {
@@ -139,7 +138,6 @@ function renderProductos(filtroTexto = "") {
   }
 
   const totalFiltrados = productosFiltrados.length;
-
   if (totalFiltrados > limite) {
     const inicio = (paginaActual - 1) * limite;
     const fin = inicio + limite;
@@ -156,25 +154,28 @@ function renderProductos(filtroTexto = "") {
 
   productosFiltrados.forEach(p => {
     contenedor.innerHTML += `
-      <div class="producto">
-        <img src="${p.imagen}" alt="${p.nombre}">
-        <h4>${p.nombre}</h4>
-        <p>${p.descripcion}</p>
-        ${p.novedad ? `<span class="novedad-texto">NEW</span>` : ""}
-        ${p.oferta && p.precioOriginal ? `
-          <p class="precio-oferta">
-            <span class="tachado">${p.precioOriginal.toFixed(2)} €</span>
-            <span class="precio-descuento">${p.precio.toFixed(2)} €</span>
-          </p>
-        ` : `<span class="precio-normal">${p.precio.toFixed(2)} €</span>`}
-        <button onclick="añadirCarritoPorNombre('${p.nombre.replace(/'/g, "\\'")}')">Añadir al carrito</button>
+      <div class="producto-wrapper">
         ${usuario?.rol === "admin" ? `
-          <button onclick="mostrarModalEditar('${p._id}', '${p.nombre}', '${p.descripcion}', ${p.precio}, '${p.imagen || ""}', ${p.oferta}, ${p.novedad}, ${p.precioOriginal || 0})">Editar</button>
+          <button class="boton-editar-admin" onclick="mostrarModalEditar('${p._id}', '${p.nombre}', '${p.descripcion}', ${p.precio}, '${p.imagen || ""}', ${p.oferta}, ${p.novedad}, ${p.precioOriginal || 0})">✎ Editar</button>
         ` : ""}
+        <div class="producto">
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h4>${p.nombre}</h4>
+          <p>${p.descripcion}</p>
+          ${p.novedad ? `<span class="novedad-texto">NEW</span>` : ""}
+          ${p.oferta && p.precioOriginal ? `
+            <p class="precio-oferta">
+              <span class="tachado">${p.precioOriginal.toFixed(2)} €</span>
+              <span class="precio-descuento">${p.precio.toFixed(2)} €</span>
+            </p>
+          ` : `<span class="precio-normal">${p.precio.toFixed(2)} €</span>`}
+          <button onclick="añadirCarritoPorNombre('${p.nombre.replace(/'/g, "\\'")}')">Añadir al carrito</button>
+        </div>
       </div>
     `;
   });
 }
+
 
 function añadirCarritoPorNombre(nombre) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));

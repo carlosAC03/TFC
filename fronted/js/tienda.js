@@ -36,6 +36,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     productos.push(...data);
 
     renderProductos(textoBusqueda);
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+      if (usuario?.rol === "admin") {
+        const botonCrear = document.createElement("button");
+        botonCrear.textContent = "➕ Añadir producto";
+        botonCrear.className = "boton-crear-admin";
+        botonCrear.onclick = mostrarModalCrear;
+
+  const titulo = document.querySelector(".titulo");
+  titulo.insertAdjacentElement("afterend", botonCrear);
+}
 
     const buscador = document.querySelector('.search-input');
     if (buscador) {

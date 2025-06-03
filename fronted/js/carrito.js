@@ -46,15 +46,20 @@ function renderCarrito(carrito) {
     contenedor.appendChild(item);
   }
 
-  const boton = document.createElement("button");
-  boton.textContent = "Comprar";
-  boton.style.backgroundColor = "#28a745";
-  boton.style.color = "white";
-  boton.style.fontSize = "18px";
-  boton.style.padding = "10px 20px";
-  boton.style.marginTop = "20px";
-  boton.onclick = realizarCompra;
-  contenedor.appendChild(boton);
+    const boton = document.createElement("button");
+    boton.textContent = "Comprar";
+    boton.className = "boton-comprar";
+    const tieneProductos = Object.keys(carrito).length > 0;
+
+if (tieneProductos) {
+    boton.disabled = false;
+    boton.onclick = realizarCompra;
+} else {
+    boton.disabled = true;
+}
+
+contenedor.appendChild(boton);
+
 }
 
 function cambiarCantidad(nombre, cambio) {

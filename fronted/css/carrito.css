@@ -59,3 +59,20 @@ button {
     font-size: 18px;
     cursor: pointer;
 }
+
+.boton-comprar {
+  background-color: #28a745;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-comprar:disabled {
+  background-color: #a5c5a5;
+  cursor: not-allowed;
+}

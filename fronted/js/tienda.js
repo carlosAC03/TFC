@@ -1,65 +1,47 @@
-// Array global donde se almacenarán los productos recuperados del servidor
 const productos = [];
-// Obtiene la página actual desde la URL
 let paginaActual = getPaginaDesdeURL();
-// Número de productos mostrados por página
 const limite = 12;
+const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
+  ? "http://localhost:4000"
+  : "https://tfc-2gv2.onrender.com";
 
-// Obtiene el parámetro "categoria" de la URL
 function getCategoriaDesdeURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("categoria");
 }
 
-// Obtiene el parámetro "busqueda" de la URL o una cadena vacía por defecto
 function getBusquedaDesdeURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("busqueda") || "";
 }
 
-// Obtiene el parámetro "page" de la URL o devuelve 1 si no existe
 function getPaginaDesdeURL() {
   const params = new URLSearchParams(window.location.search);
   return parseInt(params.get("page")) || 1;
 }
 
-// Evento que se dispara cuando el DOM ha terminado de cargarse
 document.addEventListener("DOMContentLoaded", async () => {
-  // Muestra el loader si existe
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "block";
 
   try {
-    // Determina si se está ejecutando en local o en producción
-    const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
-      ? "http://localhost:4000"
-      : "https://tfc-2gv2.onrender.com";
-
-    // Obtiene los filtros desde la URL
     const textoBusqueda = getBusquedaDesdeURL().toLowerCase();
     const categoria = getCategoriaDesdeURL();
-
-    // Si hay filtros, carga hasta 1000 productos. Si no, sólo los de la página actual
     const url = textoBusqueda || categoria
       ? `${API_URL}/productos?page=1&limit=1000`
       : `${API_URL}/productos?page=${paginaActual}&limit=${limite}`;
 
-    // Fetch de productos desde la API
     const res = await fetch(url);
     const { productos: data, total } = await res.json();
-    productos.push(...data); // Añade los productos al array global
+    productos.push(...data);
 
-    renderProductos(textoBusqueda); // Muestra los productos en pantalla
+    renderProductos(textoBusqueda);
 
-    // Configura el campo de búsqueda si existe
     const buscador = document.querySelector('.search-input');
     if (buscador) {
       buscador.value = textoBusqueda;
-
       buscador.addEventListener('input', async () => {
         const texto = buscador.value.trim().toLowerCase();
-
-        // Si hay pocos productos cargados y se empieza a escribir, recarga todos
         if (productos.length <= limite && texto.length === 1) {
           try {
             const fullRes = await fetch(`${API_URL}/productos?page=1&limit=1000`);
@@ -70,13 +52,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error al cargar todos los productos:", err);
           }
         }
-
-        // Vuelve a renderizar con el texto de búsqueda actual
         renderProductos(texto);
       });
     }
 
-    // Si no hay filtros, muestra paginación
     if (!textoBusqueda && !categoria) {
       renderPaginacion(total);
     }
@@ -84,12 +63,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     console.error("Error al cargar productos:", err);
   } finally {
-    // Oculta el loader
     if (loader) loader.style.display = "none";
   }
 });
 
-// Renderiza los botones de paginación en función del total de productos
 function renderPaginacion(total) {
   const totalPaginas = Math.ceil(total / limite);
   const paginador = document.getElementById("paginacion");
@@ -97,21 +74,18 @@ function renderPaginacion(total) {
 
   paginador.innerHTML = "";
 
-  // Botón primera página
   const btnPrimera = document.createElement("button");
   btnPrimera.textContent = "⏮";
   btnPrimera.disabled = paginaActual === 1;
   btnPrimera.addEventListener("click", () => cambiarPagina(1));
   paginador.appendChild(btnPrimera);
 
-  // Botón anterior
   const btnAnterior = document.createElement("button");
   btnAnterior.textContent = "◀";
   btnAnterior.disabled = paginaActual === 1;
   btnAnterior.addEventListener("click", () => cambiarPagina(paginaActual - 1));
   paginador.appendChild(btnAnterior);
 
-  // Botones numerados por página
   for (let i = 1; i <= totalPaginas; i++) {
     const btn = document.createElement("button");
     btn.textContent = i;
@@ -120,14 +94,12 @@ function renderPaginacion(total) {
     paginador.appendChild(btn);
   }
 
-  // Botón siguiente
   const btnSiguiente = document.createElement("button");
   btnSiguiente.textContent = "▶";
   btnSiguiente.disabled = paginaActual === totalPaginas;
   btnSiguiente.addEventListener("click", () => cambiarPagina(paginaActual + 1));
   paginador.appendChild(btnSiguiente);
 
-  // Botón última página
   const btnUltima = document.createElement("button");
   btnUltima.textContent = "⏭";
   btnUltima.disabled = paginaActual === totalPaginas;
@@ -135,14 +107,12 @@ function renderPaginacion(total) {
   paginador.appendChild(btnUltima);
 }
 
-// Cambia la página actual y recarga la URL con el nuevo parámetro
 function cambiarPagina(nuevaPagina) {
   const params = new URLSearchParams(window.location.search);
   params.set("page", nuevaPagina);
   window.location.search = params.toString();
 }
 
-// Renderiza los productos filtrados en pantalla
 function renderProductos(filtroTexto = "") {
   const contenedor = document.getElementById("productos");
   const paginador = document.getElementById("paginacion");
@@ -154,14 +124,12 @@ function renderProductos(filtroTexto = "") {
 
   let productosFiltrados = productos;
 
-  // Filtra por categoría si está presente
   if (categoriaSeleccionada) {
     productosFiltrados = productosFiltrados.filter(p =>
       p.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
     );
   }
 
-  // Filtra por búsqueda si hay texto
   if (filtroTexto || textoBusqueda) {
     const texto = (filtroTexto || textoBusqueda).toLowerCase();
     productosFiltrados = productosFiltrados.filter(p =>
@@ -172,23 +140,20 @@ function renderProductos(filtroTexto = "") {
 
   const totalFiltrados = productosFiltrados.length;
 
-  // Si hay más productos de los permitidos por página, se muestra paginación
   if (totalFiltrados > limite) {
     const inicio = (paginaActual - 1) * limite;
     const fin = inicio + limite;
     productosFiltrados = productosFiltrados.slice(inicio, fin);
     renderPaginacion(totalFiltrados);
-  } else {
-    if (paginador) paginador.innerHTML = "";
   }
 
-  // Si no hay productos tras el filtrado
   if (productosFiltrados.length === 0) {
     contenedor.innerHTML = `<p>No hay productos que coincidan con tu búsqueda.</p>`;
     return;
   }
 
-  // Renderizado del HTML para cada producto
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+
   productosFiltrados.forEach(p => {
     contenedor.innerHTML += `
       <div class="producto">
@@ -203,25 +168,25 @@ function renderProductos(filtroTexto = "") {
           </p>
         ` : `<span class="precio-normal">${p.precio.toFixed(2)} €</span>`}
         <button onclick="añadirCarritoPorNombre('${p.nombre.replace(/'/g, "\\'")}')">Añadir al carrito</button>
+        ${usuario?.rol === "admin" ? `
+          <button onclick="mostrarModalEditar('${p._id}', '${p.nombre}', '${p.descripcion}', ${p.precio}, '${p.imagen || ""}', ${p.oferta}, ${p.novedad}, ${p.precioOriginal || 0})">Editar</button>
+        ` : ""}
       </div>
     `;
   });
 }
 
-// Añade un producto al carrito usando su nombre
 function añadirCarritoPorNombre(nombre) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   if (!usuario?.email) {
     Swal.fire({
-    icon: "warning",
-    title: "Acceso requerido",
-    text: "Debes iniciar sesión para añadir productos al carrito.",
-    confirmButtonText: "Iniciar sesión"
+      icon: "warning",
+      title: "Acceso requerido",
+      text: "Debes iniciar sesión para añadir productos al carrito.",
+      confirmButtonText: "Iniciar sesión"
     }).then(result => {
-  if (result.isConfirmed) {
-    window.location.href = "login.html";
-  }
-});
+      if (result.isConfirmed) window.location.href = "login.html";
+    });
     return;
   }
 
@@ -246,4 +211,121 @@ function añadirCarritoPorNombre(nombre) {
 
   localStorage.setItem(clave, JSON.stringify(carrito));
   Swal.fire("Añadido al carrito", `${nombre} añadido al carrito`, "success");
+}
+
+function mostrarModalCrear() {
+  const formHtml = `
+    <form id="formCrearProducto" style="display:flex;flex-direction:column;gap:10px">
+      <label>Nombre: <input type="text" id="new-nombre"></label>
+      <label>Descripción: <input type="text" id="new-descripcion"></label>
+      <label>Precio: <input type="number" id="new-precio"></label>
+      <label>Precio Original: <input type="number" id="new-precioOriginal"></label>
+      <label>Imagen URL: <input type="text" id="new-imagen"></label>
+      <label><input type="checkbox" id="new-oferta"> En oferta</label>
+      <label><input type="checkbox" id="new-novedad"> Es novedad</label>
+      <label>Categoría: <input type="text" id="new-categoria"></label>
+    </form>
+  `;
+
+  Swal.fire({
+    title: "Nuevo producto",
+    html: formHtml,
+    showCancelButton: true,
+    confirmButtonText: "Crear producto",
+    focusConfirm: false,
+    preConfirm: async () => {
+      const nuevo = {
+        nombre: document.getElementById("new-nombre").value,
+        descripcion: document.getElementById("new-descripcion").value,
+        precio: parseFloat(document.getElementById("new-precio").value),
+        precioOriginal: parseFloat(document.getElementById("new-precioOriginal").value),
+        imagen: document.getElementById("new-imagen").value,
+        oferta: document.getElementById("new-oferta").checked,
+        novedad: document.getElementById("new-novedad").checked,
+        categoria: document.getElementById("new-categoria").value
+      };
+
+      const res = await fetch(`${API_URL}/productos`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nuevo)
+      });
+
+      if (!res.ok) throw new Error("Error al crear producto");
+      return res.json();
+    }
+  }).then(result => {
+    if (result.isConfirmed) {
+      Swal.fire("¡Creado!", "El producto fue añadido correctamente.", "success")
+        .then(() => location.reload());
+    }
+  });
+}
+
+function mostrarModalEditar(id, nombre, descripcion, precio, imagen, oferta, novedad, precioOriginal) {
+  const formHtml = `
+    <form id="formEditarProducto" style="display:flex;flex-direction:column;gap:10px">
+      <label>Nombre: <input type="text" id="edit-nombre" value="${nombre}"></label>
+      <label>Descripción: <input type="text" id="edit-descripcion" value="${descripcion}"></label>
+      <label>Precio: <input type="number" id="edit-precio" value="${precio}"></label>
+      <label>Precio Original: <input type="number" id="edit-precioOriginal" value="${precioOriginal}"></label>
+      <label>Imagen URL: <input type="text" id="edit-imagen" value="${imagen}"></label>
+      <label><input type="checkbox" id="edit-oferta" ${oferta ? "checked" : ""}> En oferta</label>
+      <label><input type="checkbox" id="edit-novedad" ${novedad ? "checked" : ""}> Es novedad</label>
+    </form>
+  `;
+
+  Swal.fire({
+    title: "Editar producto",
+    html: formHtml,
+    showCancelButton: true,
+    showDenyButton: true,
+    confirmButtonText: "Guardar cambios",
+    denyButtonText: "Eliminar producto",
+    cancelButtonText: "Cancelar",
+    focusConfirm: false,
+    preConfirm: async () => {
+      const updated = {
+        nombre: document.getElementById("edit-nombre").value,
+        descripcion: document.getElementById("edit-descripcion").value,
+        precio: parseFloat(document.getElementById("edit-precio").value),
+        precioOriginal: parseFloat(document.getElementById("edit-precioOriginal").value),
+        imagen: document.getElementById("edit-imagen").value,
+        oferta: document.getElementById("edit-oferta").checked,
+        novedad: document.getElementById("edit-novedad").checked
+      };
+
+      const res = await fetch(`${API_URL}/productos/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated)
+      });
+
+      if (!res.ok) throw new Error("Error al guardar");
+      return res.json();
+    }
+  }).then(async result => {
+    if (result.isConfirmed) {
+      Swal.fire("¡Actualizado!", "El producto fue modificado correctamente.", "success")
+        .then(() => location.reload());
+    } else if (result.isDenied) {
+      const confirmDelete = await Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción no se puede deshacer.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+      });
+
+      if (confirmDelete.isConfirmed) {
+        const res = await fetch(`${API_URL}/productos/${id}`, { method: "DELETE" });
+        if (res.ok) {
+          Swal.fire("¡Eliminado!", "El producto ha sido eliminado.", "success").then(() => location.reload());
+        } else {
+          Swal.fire("Error", "No se pudo eliminar el producto.", "error");
+        }
+      }
+    }
+  });
 }

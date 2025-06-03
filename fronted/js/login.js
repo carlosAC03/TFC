@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
+  const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
     ? "http://localhost:4000"
     : "https://tfc-2gv2.onrender.com";
 
@@ -8,15 +8,22 @@ const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
   const welcomeSection = document.getElementById("welcome-section");
   const userEmail = document.getElementById("user-email");
 
+  // Mostrar u ocultar secciones según sesión
   if (usuario?.email) {
     loginSection.style.display = "none";
     welcomeSection.style.display = "block";
     userEmail.textContent = usuario.email;
+
+    // Opcional: mostrar que es admin
+    if (usuario.rol === "admin") {
+      userEmail.textContent += " (Administrador)";
+    }
   } else {
     loginSection.style.display = "block";
     welcomeSection.style.display = "none";
   }
 
+  // Formulario de login
   const form = document.getElementById("login-form");
   const btnLogin = document.getElementById("btn-login");
 
@@ -39,7 +46,10 @@ const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
 
         const data = await res.json();
         if (res.ok) {
-          localStorage.setItem("usuario", JSON.stringify({ email }));
+          localStorage.setItem("usuario", JSON.stringify({
+            email: data.email,
+            rol: data.rol || "cliente"
+          }));
           location.reload();
         } else {
           Swal.fire("Error", data.message || "Error al iniciar sesión", "error");
@@ -55,7 +65,8 @@ const API_URL = ["localhost", "127.0.0.1"].includes(location.hostname)
   }
 });
 
+// Función de logout global
 function logout() {
   localStorage.removeItem("usuario");
-  window.location.reload();
+  Swal.fire("Sesión cerrada", "Vuelve pronto", "info").then(() => location.reload());
 }
